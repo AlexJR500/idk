@@ -181,6 +181,23 @@
   $$("section[id]").forEach((s) => spy.observe(s));
 
   /* =========================================================
+     COLOR POR SECCIÓN: el body adopta el tema de la sección
+     que ocupa el centro de la pantalla y se funde con transición CSS.
+     ========================================================= */
+  const themed = $$("main > [data-theme], .footer[data-theme]");
+  root.classList.add("morph");
+  const themeMeta = $('meta[name="theme-color"]');
+  const setTheme = (t) => {
+    if (document.body.dataset.theme === t) return;
+    document.body.dataset.theme = t;
+    themeMeta.content = getComputedStyle(document.body).getPropertyValue("--bg").trim() || themeMeta.content;
+  };
+  const themeIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setTheme(e.target.dataset.theme); });
+  }, { rootMargin: "-50% 0px -50% 0px" });
+  themed.forEach((s) => themeIO.observe(s));
+
+  /* =========================================================
      CARTA INTERACTIVA
      ========================================================= */
   const cats = ["Todo", ...new Set(MENU.map((d) => d.cat))];
@@ -244,6 +261,8 @@
   const refreshST = () => { if (hasGsap) { clearTimeout(refreshTimer); refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 120); } };
 
   function applyFilters() {
+    // Si la entrada de la carta sigue en marcha, la terminamos antes de medir para que Flip no herede transformaciones a medias
+    if (hasGsap) gsap.getTweensOf(dishes).forEach((t) => t.progress(1).kill());
     const state = hasGsap && !reduceMotion ? Flip.getState(dishes) : null;
     let visible = 0;
     dishes.forEach((el) => {
@@ -387,7 +406,7 @@
   /* =========================================================
      RESEÑAS (marquesina en dos filas)
      ========================================================= */
-  const COLORS = ["#c2462a", "#2f6f8f", "#8a6a2e", "#3f7a5e", "#7a4f7a", "#0f2a3d"];
+  const COLORS = ["#a4471f", "#173a4e", "#8c6a33", "#4e5b31", "#5a1e2a", "#0f1a22"];
   const stars = Array.from({ length: 5 }, () => icon("star")).join("");
   const reviewHTML = (r, i, dup) => `
     <article class="review" ${dup ? 'aria-hidden="true"' : ""}>
@@ -596,15 +615,20 @@
 
       const heroSplit = SplitText.create(".hero-title .line", { type: "words,chars", mask: "words" });
       const intro = gsap.timeline({ paused: true })
-        .from(heroSplit.chars, { yPercent: 110, rotateX: -50, opacity: 0, duration: 0.9, stagger: 0.018, ease: "expo.out" })
-        .from(".hero-eyebrow", { y: 16, opacity: 0, duration: 0.6, ease: "power2.out" }, 0.1)
-        .from(".hero-lead", { y: 20, opacity: 0, duration: 0.7, ease: "power2.out" }, 0.45)
-        .from(".hero-cta > *", { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.7)" }, 0.6)
-        .from(".hero-stats", { y: 30, opacity: 0, duration: 0.8, ease: "expo.out" }, 0.75)
-        .add(() => $$(".hero-stats [data-count]").forEach(countUp), 0.8)
-        .from(".nav", { opacity: 0, duration: 0.7, ease: "power2.out", clearProps: "opacity" }, 0.3)
-        .from(".sun", { scale: 0.4, opacity: 0, duration: 1.6, ease: "expo.out" }, 0)
-        .from(".waves path", { yPercent: 40, duration: 1.4, stagger: 0.12, ease: "expo.out" }, 0);
+        .fromTo(".arch-frame", { clipPath: "inset(100% 0% 0% 0% round 999px 999px 18px 18px)" }, { clipPath: "inset(0% 0% 0% 0% round 999px 999px 18px 18px)", duration: 1.5, ease: "expo.inOut", clearProps: "clipPath" }, 0)
+        .from(".scene", { scale: 1.35, duration: 2.2, ease: "expo.out" }, 0.2)
+        .from(".sun-g", { y: 140, duration: 2.4, ease: "expo.out" }, 0.3)
+        .from(".stars-l circle", { opacity: 0, duration: 1, stagger: 0.08 }, 0.9)
+        .from(heroSplit.chars, { yPercent: 110, rotateX: -60, opacity: 0, duration: 1, stagger: 0.02, ease: "expo.out" }, 0.25)
+        .from(".hero-eyebrow", { y: 16, opacity: 0, duration: 0.6, ease: "power2.out" }, 0.3)
+        .from(".hero-eyebrow .rule", { scaleX: 0, duration: 0.9, ease: "expo.out" }, 0.4)
+        .from(".hero-lead", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, 0.7)
+        .from(".hero-cta > *", { y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.7)" }, 0.85)
+        .from(".hero-stats .stat", { y: 24, opacity: 0, duration: 0.8, stagger: 0.08, ease: "expo.out" }, 0.95)
+        .add(() => $$(".hero-stats [data-count]").forEach(countUp), 1)
+        .from(".badge", { scale: 0, rotate: -120, duration: 1.1, ease: "back.out(1.6)" }, 1.1)
+        .from(".arch-caption", { opacity: 0, y: 20, duration: 0.8 }, 1.2)
+        .from(".nav", { opacity: 0, duration: 0.7, ease: "power2.out", clearProps: "opacity" }, 0.3);
 
       if (seen) {
         endLoading();
@@ -615,19 +639,28 @@
         paths.forEach((p) => { const len = p.getTotalLength(); gsap.set(p, { strokeDasharray: len, strokeDashoffset: len }); });
         lt.to(paths, { strokeDashoffset: 0, duration: 0.9, stagger: 0.12, ease: "power2.inOut" })
           .from(".l-sun", { scale: 0, transformOrigin: "center", duration: 0.5, ease: "back.out(3)" }, 0.5)
-          .from(".loader-word span", { yPercent: 110, duration: 0.6, stagger: 0.05, ease: "expo.out" }, 0.3)
-          .to(".loader-panel", { scaleY: 1, duration: 0.5, ease: "expo.inOut" }, "+=0.15")
-          .to(loader, { clipPath: "inset(0 0 100% 0)", duration: 0.8, ease: "expo.inOut" })
-          .add(() => intro.play(), "-=0.45");
-        setTimeout(endLoading, 5000); // salvaguarda
+          .from(".loader-word span", { yPercent: 110, duration: 0.7, stagger: 0.05, ease: "expo.out" }, 0.3)
+          .from(".loader-sub", { opacity: 0, letterSpacing: "0.8em", duration: 0.9, ease: "expo.out" }, 0.6)
+          // Cortinas con la paleta de la casa: suben y luego se retiran hacia arriba
+          .to(".loader-curtains i", { scaleY: 1, duration: 0.6, stagger: 0.07, ease: "expo.inOut" }, "+=0.2")
+          .set(".loader-inner", { opacity: 0 })
+          .set(loader, { background: "transparent" })
+          .set(".loader-curtains i", { transformOrigin: "top" })
+          .to(".loader-curtains i", { scaleY: 0, duration: 0.7, stagger: 0.07, ease: "expo.inOut" })
+          .add(() => intro.play(), "-=0.7");
+        setTimeout(endLoading, 6000); // salvaguarda
       }
 
-      /* --- Parallax del hero --- */
-      gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 } })
-        .to(".sun", { yPercent: 60, scale: 1.2 }, 0)
-        .to(".w1", { yPercent: 25 }, 0)
-        .to(".w2", { yPercent: 12 }, 0)
-        .to(".hero-content", { yPercent: 18, opacity: 0.2 }, 0);
+      /* --- Escena del arco: olas vivas y atardecer al hacer scroll --- */
+      gsap.to(".wv1", { x: -40, duration: 5, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.to(".wv2", { x: 40, duration: 6.5, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.to(".glints rect", { opacity: 0.15, scaleX: 0.6, transformOrigin: "center", duration: 1.4, stagger: { each: 0.25, repeat: -1, yoyo: true }, ease: "sine.inOut" });
+      gsap.to(".boat", { x: -60, y: 2, duration: 14, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.timeline({ scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.8 } })
+        .to(".sun-g", { y: 90 }, 0)
+        .to(".sky", { opacity: 0.35 }, 0)
+        .to(".hero-arch", { yPercent: -10 }, 0)
+        .to(".hero-content", { yPercent: 14, opacity: 0.25 }, 0);
 
       /* --- Marquesina que reacciona a la dirección del scroll --- */
       const mq = gsap.to(".marquee-track", { xPercent: -50, duration: 28, ease: "none", repeat: -1 });
@@ -646,6 +679,18 @@
       gsap.fromTo(st.words, { opacity: 0.12 }, {
         opacity: 1, stagger: 0.1, ease: "none",
         scrollTrigger: { trigger: ".statement", start: "top 70%", end: "bottom 60%", scrub: true },
+      });
+
+      /* --- Paleta de la casa: arcos que brotan en cascada --- */
+      gsap.from(".palette span", {
+        yPercent: 60, scaleY: 0.2, opacity: 0, transformOrigin: "bottom", duration: 1.1, stagger: 0.09, ease: "expo.out",
+        scrollTrigger: { trigger: ".palette", start: "top 90%", once: true },
+      });
+
+      /* --- Líneas de los antetítulos --- */
+      $$(".eyebrow .rule").forEach((r) => {
+        if (r.closest(".hero")) return;
+        gsap.from(r, { scaleX: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: r, start: "top 92%", once: true } });
       });
 
       /* --- Titulares con máscara por líneas --- */
@@ -761,6 +806,23 @@
       addEventListener("pointermove", move);
       document.addEventListener("pointerover", over);
 
+      // El arco del hero sigue al ratón en capas (sol, olas y marco a distinta profundidad)
+      const hero = $(".hero");
+      const layers = [[".sun-disc", 18], [".sun-glow", 12], [".hill", 8], [".stars-l", 5]].map(([sel, d]) => ({
+        xTo: gsap.quickTo(sel, "x", { duration: 1.2, ease: "power3" }), d,
+      }));
+      const archRX = gsap.quickTo(".arch-frame", "rotationY", { duration: 1, ease: "power3" });
+      const archRY = gsap.quickTo(".arch-frame", "rotationX", { duration: 1, ease: "power3" });
+      gsap.set(".hero-arch", { perspective: 900 });
+      const heroMove = (e) => {
+        const nx = e.clientX / innerWidth - 0.5;
+        const ny = e.clientY / innerHeight - 0.5;
+        layers.forEach(({ xTo, d }) => xTo(nx * d));
+        archRX(nx * 8);
+        archRY(-ny * 6);
+      };
+      hero.addEventListener("pointermove", heroMove);
+
       const mags = $$(".magnetic").map((el) => {
         const xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
         const yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
@@ -778,6 +840,7 @@
       return () => {
         root.classList.remove("has-cursor");
         removeEventListener("pointermove", move);
+        hero.removeEventListener("pointermove", heroMove);
         document.removeEventListener("pointerover", over);
         mags.forEach(({ el, mv, lv }) => { el.removeEventListener("pointermove", mv); el.removeEventListener("pointerleave", lv); gsap.set(el, { x: 0, y: 0 }); });
       };
