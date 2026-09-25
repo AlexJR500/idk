@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marbar · Restaurante en Sant Gervasi, Barcelona</title>
-  <meta name="description" content="Marbar, restaurante en el Passeig de la Bonanova 77 (Sarrià-Sant Gervasi, Barcelona). 4,9 ★ con más de 1.300 reseñas. Reserva tu mesa, pide para llevar o a domicilio." />
-  <meta name="theme-color" content="#0f2a3d" />
+  <title>Marbar · Restaurante mediterráneo en Sant Gervasi, Barcelona</title>
+  <meta name="description" content="Marbar, restaurante mediterráneo en el Passeig de la Bonanova 77 (Sarrià-Sant Gervasi, Barcelona). 4,9 ★ con más de 1.300 reseñas. Reserva tu mesa, pide para llevar o a domicilio." />
+  <meta name="theme-color" content="#0f1a22" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
   {
@@ -32,7 +32,7 @@
   }
   </script>
 </head>
-<body class="is-loading">
+<body class="is-loading" data-theme="ink">
   <!-- Iconos (Lucide, MIT) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -60,16 +60,19 @@
     </defs>
   </svg>
 
-  <!-- PRELOADER -->
+  <!-- PRELOADER: cortinas con la paleta de la casa -->
   <div class="loader" aria-hidden="true">
-    <svg class="loader-mark" viewBox="0 0 40 40">
-      <circle class="l-ring" cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
-      <path class="l-wave" d="M6 23c3.5-3 7-3 10.5 0s7 3 10.5 0 5-2.5 7 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <path class="l-wave" d="M6 28c3.5-3 7-3 10.5 0s7 3 10.5 0 5-2.5 7 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
-      <circle class="l-sun" cx="26" cy="13" r="3.5" fill="currentColor"/>
-    </svg>
-    <div class="loader-word"><span>M</span><span>a</span><span>r</span><span>b</span><span>a</span><span>r</span></div>
-    <div class="loader-panel"></div>
+    <div class="loader-inner">
+      <svg class="loader-mark" viewBox="0 0 40 40">
+        <circle class="l-ring" cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path class="l-wave" d="M6 23c3.5-3 7-3 10.5 0s7 3 10.5 0 5-2.5 7 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path class="l-wave" d="M6 28c3.5-3 7-3 10.5 0s7 3 10.5 0 5-2.5 7 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>
+        <circle class="l-sun" cx="26" cy="13" r="3.5" fill="currentColor"/>
+      </svg>
+      <div class="loader-word"><span>M</span><span>a</span><span>r</span><span>b</span><span>a</span><span>r</span></div>
+      <p class="loader-sub">Bonanova · Barcelona</p>
+    </div>
+    <div class="loader-curtains"><i style="--c:var(--terra)"></i><i style="--c:var(--olive)"></i><i style="--c:var(--wine)"></i><i style="--c:var(--sea)"></i><i style="--c:var(--brass)"></i></div>
   </div>
 
   <!-- Cursor -->
@@ -86,10 +89,11 @@
       <span>Marbar</span>
     </a>
     <nav class="nav-links" id="mobileNav" aria-label="Principal">
-      <a href="#experiencia">Experiencia</a>
+      <a href="#casa">La casa</a>
       <a href="#carta">Carta</a>
       <a href="#resenas">Reseñas</a>
       <a href="#visitanos">Visítanos</a>
+      <a href="#reservar" class="nav-links-cta">Reservar mesa</a>
     </nav>
     <div class="nav-actions">
       <span class="status-pill" data-status><span class="dot"></span><span data-status-text>Consultando horario…</span></span>
@@ -100,89 +104,133 @@
 
   <main>
   <!-- HERO -->
-  <section class="hero" aria-labelledby="heroTitle">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="grain"></div>
-      <div class="sun"></div>
-      <div class="bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <svg class="waves" viewBox="0 0 1440 320" preserveAspectRatio="none">
-        <path class="w1" d="M0,192 C240,256 480,128 720,160 C960,192 1200,288 1440,224 L1440,320 L0,320Z"/>
-        <path class="w2" d="M0,224 C200,192 440,288 720,256 C1000,224 1240,160 1440,208 L1440,320 L0,320Z"/>
-        <path class="w3" d="M0,272 C260,240 520,304 760,288 C1000,272 1220,240 1440,264 L1440,320 L0,320Z"/>
-      </svg>
-    </div>
-    <div class="hero-content">
-      <p class="eyebrow hero-eyebrow">Sarrià · Sant Gervasi · Barcelona</p>
-      <h1 id="heroTitle" class="hero-title">
-        <span class="line">Donde el Mediterráneo</span>
-        <span class="line"><em>se sienta a la mesa.</em></span>
-      </h1>
-      <p class="lead hero-lead">Cocina honesta, producto de mercado y un servicio que hace que vuelvas. En el corazón de la Bonanova, de mediodía a medianoche.</p>
-      <div class="hero-cta">
-        <a href="#reservar" class="btn magnetic"><span>Reservar una mesa</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a href="#carta" class="btn btn-ghost magnetic">Ver la carta</a>
+  <section class="hero" data-theme="ink" aria-labelledby="heroTitle">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="eyebrow hero-eyebrow"><span class="rule"></span>Cocina mediterránea · Sarrià-Sant Gervasi</p>
+        <h1 id="heroTitle" class="hero-title">
+          <span class="line">El Mediterráneo</span>
+          <span class="line"><em>se sienta</em> a la mesa</span>
+        </h1>
+        <p class="lead hero-lead">Producto de mercado, fuego preciso y una sobremesa que no quieres que acabe. En el corazón de la Bonanova, de mediodía a medianoche.</p>
+        <div class="hero-cta">
+          <a href="#reservar" class="btn magnetic"><span>Reservar una mesa</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="#carta" class="btn btn-ghost magnetic">Descubrir la carta</a>
+        </div>
+        <dl class="hero-stats">
+          <div class="stat">
+            <dt>Valoración en Google</dt>
+            <dd><span data-count="4.9" data-decimals="1">4,9</span><svg class="ic ic-star" aria-hidden="true"><use href="#i-star"/></svg></dd>
+          </div>
+          <div class="stat">
+            <dt>Reseñas</dt>
+            <dd><span data-count="1301">1.301</span>+</dd>
+          </div>
+          <div class="stat">
+            <dt>Por persona</dt>
+            <dd>20–30 €</dd>
+          </div>
+        </dl>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <strong><span data-count="4.9" data-decimals="1">4,9</span><svg class="ic ic-star" aria-hidden="true"><use href="#i-star"/></svg></strong>
-          <span>Valoración media</span>
+
+      <!-- Ventana en arco con escena animada -->
+      <figure class="hero-arch" aria-hidden="true">
+        <div class="arch-frame">
+          <svg class="scene" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1e3a52"/>
+                <stop offset=".45" stop-color="#b86a4a"/>
+                <stop offset=".72" stop-color="#e9b27a"/>
+              </linearGradient>
+              <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2a5873"/>
+                <stop offset="1" stop-color="#0f1a22"/>
+              </linearGradient>
+              <radialGradient id="sunG">
+                <stop offset="0" stop-color="#fff1d6"/>
+                <stop offset=".55" stop-color="#f3c27e"/>
+                <stop offset="1" stop-color="#e38a5a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect class="sky" width="400" height="520" fill="url(#skyG)"/>
+            <g class="stars-l">
+              <circle cx="60" cy="60" r="1.2"/><circle cx="130" cy="30" r="1"/><circle cx="300" cy="50" r="1.4"/><circle cx="350" cy="110" r="1"/><circle cx="220" cy="80" r="1"/><circle cx="90" cy="130" r="1"/>
+            </g>
+            <g class="sun-g"><circle class="sun-glow" cx="200" cy="300" r="120" fill="url(#sunG)"/><circle class="sun-disc" cx="200" cy="300" r="52" fill="#f7d49a"/></g>
+            <path class="hill" d="M0 330 C60 300 110 312 160 322 C220 334 270 300 330 306 C360 309 385 318 400 322 V360 H0Z" fill="#3b2a2c" opacity=".55"/>
+            <rect class="sea" y="336" width="400" height="184" fill="url(#seaG)"/>
+            <g class="glints">
+              <rect x="170" y="350" width="60" height="2" rx="1"/><rect x="150" y="366" width="100" height="2" rx="1"/><rect x="182" y="384" width="36" height="2" rx="1"/><rect x="130" y="404" width="140" height="2" rx="1"/><rect x="176" y="428" width="48" height="2" rx="1"/>
+            </g>
+            <path class="wave wv1" d="M-40 440 C20 425 70 455 130 440 S240 425 300 440 S410 455 460 440 V520 H-40Z" fill="#163448"/>
+            <path class="wave wv2" d="M-40 470 C30 455 80 485 150 470 S260 455 320 470 S420 485 460 470 V520 H-40Z" fill="#0f2535"/>
+            <g class="boat"><path d="M270 352 h30 l-5 6 h-20z" fill="#0f1a22"/><path d="M285 351 V330 l10 18z" fill="#f3ede2" opacity=".9"/></g>
+          </svg>
         </div>
-        <div class="stat">
-          <strong><span data-count="1301">1.301</span>+</strong>
-          <span>Reseñas de clientes</span>
-        </div>
-        <div class="stat">
-          <strong>20–30 €</strong>
-          <span>Por persona</span>
-        </div>
-      </div>
+        <svg class="badge" viewBox="0 0 120 120">
+          <defs><path id="circ" d="M60 60 m-46 0 a46 46 0 1 1 92 0 a46 46 0 1 1 -92 0"/></defs>
+          <text><textPath href="#circ">4,9 ★ en Google · 1.301 reseñas · Bonanova 77 · </textPath></text>
+          <use href="#i-star" x="46" y="46" width="28" height="28" class="badge-star"/>
+        </svg>
+        <span class="arch-caption">Pg. de la Bonanova, 77</span>
+      </figure>
     </div>
-    <a href="#experiencia" class="scroll-hint" aria-label="Bajar a la experiencia"><span></span></a>
+    <a href="#casa" class="scroll-hint" aria-label="Bajar a la casa"><span></span></a>
   </section>
 
   <!-- MARQUEE -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Comer allí</span><b>✦</b><span>Para llevar</span><b>✦</b><span>A domicilio</span><b>✦</b><span>Reservas</span><b>✦</b><span>Abierto hasta las 0:00</span><b>✦</b>
-      <span>Comer allí</span><b>✦</b><span>Para llevar</span><b>✦</b><span>A domicilio</span><b>✦</b><span>Reservas</span><b>✦</b><span>Abierto hasta las 0:00</span><b>✦</b>
+      <span>Comer allí</span><b>✦</b><span><em>Para llevar</em></span><b>✦</b><span>A domicilio</span><b>✦</b><span><em>Reservas</em></span><b>✦</b><span>Abierto hasta las 0:00</span><b>✦</b>
+      <span>Comer allí</span><b>✦</b><span><em>Para llevar</em></span><b>✦</b><span>A domicilio</span><b>✦</b><span><em>Reservas</em></span><b>✦</b><span>Abierto hasta las 0:00</span><b>✦</b>
     </div>
   </div>
 
-  <!-- STATEMENT -->
-  <section class="statement" aria-label="Nuestra filosofía">
-    <div class="container">
+  <!-- MANIFIESTO -->
+  <section class="statement" id="casa" data-theme="bone" aria-label="Nuestra filosofía">
+    <div class="container statement-grid">
+      <p class="eyebrow"><span class="rule"></span>La casa</p>
       <p class="statement-text" id="statement">Una nota de 4,9 no se consigue por casualidad. Se consigue plato a plato, mesa a mesa, cada día. Buen producto, fuego preciso y una sobremesa que no quieres que acabe.</p>
+      <div class="palette" aria-hidden="true">
+        <span style="--c:var(--terra)" data-name="Terracota"></span>
+        <span style="--c:var(--olive)" data-name="Oliva"></span>
+        <span style="--c:var(--sea)" data-name="Mar"></span>
+        <span style="--c:var(--wine)" data-name="Vino"></span>
+        <span style="--c:var(--brass)" data-name="Latón"></span>
+      </div>
     </div>
   </section>
 
   <!-- EXPERIENCIA: scroll horizontal -->
-  <section class="experience" id="experiencia" aria-labelledby="expTitle">
+  <section class="experience" id="experiencia" data-theme="olive" aria-labelledby="expTitle">
     <div class="exp-track">
       <div class="exp-panel exp-intro">
-        <p class="eyebrow">La experiencia Marbar</p>
-        <h2 id="expTitle" class="split-heading">1.301 personas no pueden estar equivocadas.</h2>
+        <p class="eyebrow"><span class="rule"></span>La experiencia Marbar</p>
+        <h2 id="expTitle" class="split-heading">1.301 personas no pueden estar <em>equivocadas.</em></h2>
         <p class="muted">Todo por <strong>20–30 € por persona</strong>, porque comer bien en Barcelona no debería ser un lujo.</p>
         <p class="exp-hint" aria-hidden="true">Sigue bajando <svg class="ic"><use href="#i-arrow"/></svg></p>
       </div>
-      <article class="exp-panel exp-card" style="--c:#2f6f8f">
+      <article class="exp-panel exp-card" style="--c:var(--sea)">
         <span class="exp-num">01</span>
         <div class="exp-icon"><svg class="ic" aria-hidden="true"><use href="#i-fish"/></svg></div>
         <h3>Producto de mercado</h3>
         <p>Compramos a diario y la carta se mueve con la temporada. Si hoy no está perfecto, hoy no sale.</p>
       </article>
-      <article class="exp-panel exp-card" style="--c:#b8452a">
+      <article class="exp-panel exp-card" style="--c:var(--terra)">
         <span class="exp-num">02</span>
         <div class="exp-icon"><svg class="ic" aria-hidden="true"><use href="#i-wine"/></svg></div>
         <h3>Para compartir</h3>
         <p>Platos pensados para el centro de la mesa, una buena copa y conversación sin prisa.</p>
       </article>
-      <article class="exp-panel exp-card" style="--c:#16324a">
+      <article class="exp-panel exp-card" style="--c:var(--wine)">
         <span class="exp-num">03</span>
         <div class="exp-icon"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg></div>
         <h3>Hasta medianoche</h3>
         <p>Comida, afterwork o cena tardía: la cocina te espera hasta las 0:00.</p>
       </article>
-      <article class="exp-panel exp-card" style="--c:#8a6a2e">
+      <article class="exp-panel exp-card" style="--c:var(--brass-deep)">
         <span class="exp-num">04</span>
         <div class="exp-icon"><svg class="ic" aria-hidden="true"><use href="#i-bike"/></svg></div>
         <h3>También en casa</h3>
@@ -192,11 +240,11 @@
   </section>
 
   <!-- CARTA -->
-  <section class="section section-dark" id="carta" aria-labelledby="menuTitle">
+  <section class="section" id="carta" data-theme="wine" aria-labelledby="menuTitle">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">La carta</p>
-        <h2 id="menuTitle" class="split-heading">Elige, comparte, repite.</h2>
+        <p class="eyebrow"><span class="rule"></span>La carta<span class="rule"></span></p>
+        <h2 id="menuTitle" class="split-heading">Elige, comparte, <em>repite.</em></h2>
         <p class="muted fade-up">Toca un plato para añadirlo a tu mesa y calcula cuánto os sale por persona.</p>
       </div>
 
@@ -212,7 +260,7 @@
       <div class="menu-layout">
         <div class="menu-grid" id="menuGrid"></div>
 
-        <aside class="table-card" id="tableCard" aria-label="Tu mesa">
+        <aside class="table-card surface" id="tableCard" aria-label="Tu mesa">
           <div class="table-head">
             <h3>Tu mesa</h3>
             <button class="link-btn" id="clearTable">Vaciar</button>
@@ -238,14 +286,13 @@
   </section>
 
   <!-- RESEÑAS -->
-  <section class="section reviews" id="resenas" aria-labelledby="revTitle">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Lo que dicen de nosotros</p>
+  <section class="section reviews" id="resenas" data-theme="linen" aria-labelledby="revTitle">
+    <div class="container reviews-head">
+      <div>
+        <p class="eyebrow"><span class="rule"></span>Lo que dicen de nosotros</p>
         <h2 id="revTitle" class="big-rating"><span data-count="4.9" data-decimals="1">4,9</span><span class="stars" aria-label="5 estrellas"><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg><svg class="ic"><use href="#i-star"/></svg></span></h2>
         <p class="muted">Media de <strong>1.301 reseñas</strong> en Google.</p>
       </div>
-
       <div class="rating-bars" aria-label="Distribución de valoraciones">
         <div class="bar-row"><span>5</span><div class="bar"><i style="--w:.93"></i></div></div>
         <div class="bar-row"><span>4</span><div class="bar"><i style="--w:.05"></i></div></div>
@@ -267,11 +314,11 @@
   </section>
 
   <!-- RESERVAR -->
-  <section class="section section-sand" id="reservar" aria-labelledby="bookTitle">
+  <section class="section" id="reservar" data-theme="terra" aria-labelledby="bookTitle">
     <div class="container split">
       <div class="split-text">
-        <p class="eyebrow">Reserva</p>
-        <h2 id="bookTitle" class="split-heading">Tu mesa, en tres toques.</h2>
+        <p class="eyebrow"><span class="rule"></span>Reserva</p>
+        <h2 id="bookTitle" class="split-heading">Tu mesa, en <em>tres toques.</em></h2>
         <p class="fade-up">Elige día, hora y cuántos sois. Te enviamos la solicitud por WhatsApp al restaurante y te confirmamos en seguida. ¿Prefieres hablar? Llámanos al <a href="tel:+34673650774" class="inline-link">673 65 07 74</a>.</p>
         <ul class="modes">
           <li><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg>Comer allí</li>
@@ -280,7 +327,7 @@
         </ul>
       </div>
 
-      <form class="booking" id="bookingForm" novalidate>
+      <form class="booking surface" id="bookingForm" novalidate>
         <div class="steps" aria-hidden="true">
           <span class="step" data-step="date"><svg class="ic"><use href="#i-calendar"/></svg>Día</span>
           <span class="step" data-step="time"><svg class="ic"><use href="#i-clock"/></svg>Hora</span>
@@ -322,11 +369,11 @@
   </section>
 
   <!-- VISITANOS -->
-  <section class="section" id="visitanos" aria-labelledby="visitTitle">
+  <section class="section" id="visitanos" data-theme="sea" aria-labelledby="visitTitle">
     <div class="container split visit">
       <div class="split-text">
-        <p class="eyebrow">Visítanos</p>
-        <h2 id="visitTitle" class="split-heading">Pg. de la Bonanova, 77</h2>
+        <p class="eyebrow"><span class="rule"></span>Visítanos</p>
+        <h2 id="visitTitle" class="split-heading">Pg. de la Bonanova, <em>77</em></h2>
         <p class="fade-up">Sarrià-Sant Gervasi, 08017 Barcelona</p>
 
         <div class="hours fade-up">
@@ -363,13 +410,13 @@
   </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" data-theme="ink">
     <div class="container footer-inner">
-      <a href="#reservar" class="footer-cta magnetic">¿Nos vemos esta noche? <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="#reservar" class="footer-cta magnetic">¿Nos vemos <em>esta noche?</em> <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <p>Pg. de la Bonanova, 77 · 08017 Barcelona · <a href="tel:+34673650774">673 65 07 74</a></p>
       <p class="muted">© <span id="year"></span> Marbar. Todos los derechos reservados.</p>
     </div>
-    <div class="footer-word" aria-hidden="true"><span>M</span><span>A</span><span>R</span><span>B</span><span>A</span><span>R</span></div>
+    <div class="footer-word" aria-hidden="true"><span>M</span><span>a</span><span>r</span><span>b</span><span>a</span><span>r</span></div>
   </footer>
 
   <!-- Mesa flotante + CTA móvil -->
@@ -382,7 +429,7 @@
 
   <!-- Modal de confirmación -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
-    <div class="modal-card">
+    <div class="modal-card surface">
       <button class="icon-btn modal-close" id="modalClose" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
       <svg class="check" viewBox="0 0 52 52" aria-hidden="true">
         <circle cx="26" cy="26" r="24" fill="none"/>
