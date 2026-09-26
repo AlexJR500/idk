@@ -1,0 +1,935 @@
+<title>Gallioli Bistrot</title>
+<meta name="description" content="Gallioli Bistrot · Pollo a la brasa, croquetas y allioli de la casa en Sant Gervasi, Barcelona.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Martian+Mono:wght@400;600&display=swap">
+<style>
+  /* Gallioli: un solo mundo visual (amarillo allioli, verde helecho, guindilla) */
+  :root {
+    color-scheme: light;
+    --paper: #FFF9E4;
+    --butter: #F6E6A6;
+    --butter-deep: #EDD37A;
+    --fern: #143A28;
+    --fern-2: #1E4D36;
+    --leaf: #3C7A4E;
+    --chili: #D8412A;
+    --crust: #C98224;
+    --ink: #13281C;
+    --ink-soft: #3E5446;
+    --line: rgba(19, 40, 28, .16);
+    --white: #FFFDF6;
+    --f-display: "Bagel Fat One", "Arial Black", system-ui, sans-serif;
+    --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --wrap: 1180px;
+    --gutter: clamp(16px, 4vw, 40px);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--f-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--chili); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+  .mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+  .eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--leaf); }
+  .h2 { font-family: var(--f-display); font-weight: 400; font-size: clamp(38px, 6vw, 68px); line-height: .98; letter-spacing: -.01em; }
+  .lead { font-size: clamp(17px, 1.6vw, 19px); color: var(--ink-soft); max-width: 58ch; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 999px; border: 2px solid var(--ink);
+    font-weight: 700; font-size: 16px; text-decoration: none; background: transparent;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 0 var(--ink); }
+  .btn:active { transform: translateY(0); box-shadow: none; }
+  .btn-primary { background: var(--chili); border-color: var(--chili); color: var(--white); }
+  .btn-primary:hover { box-shadow: 0 4px 0 #8f2615; }
+  .btn-sm { padding: 9px 16px; font-size: 14px; }
+
+  /* ---------- Cabecera ---------- */
+  .top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-in { display: flex; align-items: center; gap: 20px; min-height: 66px; }
+  .logo { font-family: var(--f-display); font-size: 28px; text-decoration: none; line-height: 1; display: flex; align-items: baseline; gap: 6px; }
+  .logo .g { color: var(--chili); }
+  .logo small { font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .nav { display: flex; gap: 22px; margin-left: auto; }
+  .nav a { text-decoration: none; font-weight: 600; font-size: 15px; position: relative; }
+  .nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -4px; height: 3px; border-radius: 3px; background: var(--butter-deep); transition: right .2s ease; }
+  .nav a:hover::after { right: 0; }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+    background: var(--white); border: 1px solid var(--line); font-size: 13px; font-weight: 600; white-space: nowrap;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--chili); flex: none; }
+  .is-open .dot { background: #2E9A55; box-shadow: 0 0 0 0 rgba(46,154,85,.6); animation: ping 2s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(46,154,85,.55);} 80%,100% { box-shadow: 0 0 0 10px rgba(46,154,85,0);} }
+  @media (max-width: 900px) { .nav { display: none; } .top-in .status-pill { margin-left: auto; } }
+  @media (max-width: 520px) { .top-in .btn { display: none; } .logo small { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { background: var(--butter); position: relative; overflow: hidden; border-bottom: 2px solid var(--ink); }
+  .hero-in { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(24px, 4vw, 56px); align-items: center; padding-block: clamp(36px, 6vw, 72px); }
+  .wordmark {
+    font-family: var(--f-display); font-weight: 400; line-height: .86;
+    font-size: clamp(64px, 9.5vw, 132px); letter-spacing: -.02em; color: var(--fern); white-space: nowrap;
+    position: relative; display: inline-block;
+  }
+  .wordmark .g { color: var(--chili); display: inline-block; transform-origin: 50% 90%; transition: transform .3s cubic-bezier(.3,1.6,.5,1); }
+  .wordmark:hover .g { transform: rotate(-8deg) scale(1.06); }
+  .drips { display: block; width: 100%; height: clamp(26px, 4vw, 48px); margin-top: -4px; overflow: visible; }
+  .drips path { fill: var(--white); stroke: var(--fern); stroke-width: 2.5; }
+  .drip { transform-box: fill-box; transform-origin: top; animation: drip 5s ease-in-out infinite; }
+  .drip:nth-child(2) { animation-delay: .8s; } .drip:nth-child(3) { animation-delay: 1.7s; } .drip:nth-child(4) { animation-delay: 2.4s; }
+  @keyframes drip { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.35); } }
+  .hero-tag { font-family: var(--f-mono); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; display: flex; flex-wrap: wrap; gap: 8px 14px; }
+  .hero-tag span + span::before { content: "✦"; margin-right: 14px; color: var(--chili); }
+  .hero h1.claim { font-family: var(--f-body); font-weight: 700; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; margin-top: 18px; max-width: 22ch; }
+  .hero .lead { margin-top: 12px; color: var(--ink-soft); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .fact { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 10px; background: color-mix(in srgb, var(--white) 70%, transparent); border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+  .fact b { font-family: var(--f-mono); font-weight: 600; }
+  .stars { color: var(--crust); letter-spacing: 1px; }
+
+  .plate-box { position: relative; justify-self: center; width: min(100%, 520px); }
+  .plate-stage { position: relative; aspect-ratio: 1; max-width: 100%; }
+  #plate { width: 100%; height: 100%; display: block; touch-action: none; cursor: crosshair; border-radius: 50%; }
+  .plate-hint {
+    position: absolute; left: 50%; top: -6px; transform: translateX(-50%) rotate(-3deg);
+    background: var(--fern); color: var(--butter); font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 10px; white-space: nowrap; pointer-events: none; transition: opacity .3s;
+  }
+  .plate-hint::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; background: inherit; transform: translateX(-50%) rotate(45deg); border-radius: 2px; }
+  .sauces { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+  .sauce {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 2px solid var(--ink);
+    background: var(--white); font-weight: 700; font-size: 14px;
+  }
+  .sauce i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--ink); }
+  .sauce[aria-pressed="true"] { background: var(--fern); color: var(--butter); border-color: var(--fern); }
+  .sauce.clear { border-style: dashed; }
+  .ticker { background: var(--fern); color: var(--butter); overflow: hidden; border-top: 2px solid var(--ink); }
+  .ticker-track { display: flex; gap: 48px; width: max-content; padding-block: 12px; animation: tick 38s linear infinite; font-family: var(--f-display); font-size: 22px; }
+  .ticker-track span::after { content: "●"; font-size: 10px; color: var(--chili); margin-left: 48px; vertical-align: middle; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+  @media (max-width: 900px) {
+    .hero-in { grid-template-columns: 1fr; }
+    .plate-box { width: min(100%, 440px); }
+  }
+
+  /* ---------- La casa ---------- */
+  section { scroll-margin-top: 80px; }
+  .casa { padding-block: clamp(64px, 9vw, 120px); position: relative; overflow: hidden; }
+  .casa-in { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .casa .h2 { margin-top: 12px; }
+  .casa .lead { margin-top: 20px; }
+  .pillars { display: grid; gap: 14px; margin-top: 30px; }
+  .pillar { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .pillar svg { width: 44px; height: 44px; }
+  .pillar h3 { font-size: 17px; font-weight: 700; }
+  .pillar p { font-size: 15px; color: var(--ink-soft); }
+  .photos { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: clamp(90px, 11vw, 140px); gap: 12px; }
+  .ph {
+    border-radius: var(--radius); border: 2px solid var(--ink); position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 12px; background-size: 22px 22px;
+  }
+  .ph span { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: var(--white); border: 1px solid var(--ink); padding: 4px 8px; border-radius: 6px; }
+  .ph-a { grid-column: span 4; grid-row: span 2; background-color: var(--fern-2); background-image: radial-gradient(rgba(246,230,166,.18) 2px, transparent 2.5px); }
+  .ph-b { grid-column: span 2; grid-row: span 2; background-color: var(--crust); background-image: radial-gradient(rgba(255,249,228,.25) 2px, transparent 2.5px); }
+  .ph-c { grid-column: span 3; background-color: var(--butter-deep); background-image: radial-gradient(rgba(19,40,28,.12) 2px, transparent 2.5px); }
+  .ph-d { grid-column: span 3; background-color: var(--chili); background-image: radial-gradient(rgba(255,249,228,.22) 2px, transparent 2.5px); }
+  .ph svg.leafy { position: absolute; right: -18px; top: -14px; width: 60%; max-width: 280px; opacity: .9; }
+  .sway { transform-origin: 90% 10%; animation: sway 7s ease-in-out infinite; }
+  @keyframes sway { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-4deg); } }
+  @media (max-width: 900px) { .casa-in { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .photos { grid-template-columns: repeat(2, 1fr); } .ph-a, .ph-b, .ph-c, .ph-d { grid-column: span 1; grid-row: span 1; } .ph-a { grid-column: span 2; grid-row: span 2; } }
+
+  /* ---------- Carta + mesa ---------- */
+  .carta { background: var(--fern); color: var(--butter); padding-block: clamp(64px, 9vw, 120px); border-block: 2px solid var(--ink); }
+  .carta .eyebrow { color: var(--butter-deep); }
+  .carta .lead { color: color-mix(in srgb, var(--butter) 80%, var(--fern)); margin-top: 16px; }
+  .carta-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+  .filter { padding: 8px 16px; border-radius: 999px; border: 1.5px solid color-mix(in srgb, var(--butter) 50%, transparent); background: transparent; color: var(--butter); font-weight: 600; font-size: 14px; }
+  .filter[aria-pressed="true"] { background: var(--butter); color: var(--fern); border-color: var(--butter); }
+  .carta-grid { display: grid; grid-template-columns: 1fr 400px; gap: clamp(24px, 3vw, 40px); margin-top: 24px; align-items: start; }
+  .dishes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .dish {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 18px; border: 2px solid var(--ink);
+    display: grid; grid-template-rows: auto 1fr auto; gap: 10px; position: relative; overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease, opacity .25s ease;
+  }
+  .dish:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--ink); }
+  .dish[hidden] { display: none !important; }
+  .dish-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+  .dish h3 { font-family: var(--f-display); font-weight: 400; font-size: 22px; line-height: 1.05; }
+  .swatch { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--ink); flex: none; display: grid; place-items: center; font-family: var(--f-mono); font-size: 10px; font-weight: 600; color: var(--white); }
+  .dish p { font-size: 15px; color: var(--ink-soft); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--ink); }
+  .tag.pop { background: var(--butter); }
+  .tag.hot { background: var(--chili); color: var(--white); border-color: var(--chili); }
+  .tag.rev { border-style: dashed; }
+  .dish-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .price { font-family: var(--f-mono); font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .add { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--ink); background: var(--butter); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: 14px; }
+  .add:hover { background: var(--butter-deep); }
+  .add .n { font-family: var(--f-mono); font-size: 12px; background: var(--fern); color: var(--butter); border-radius: 999px; min-width: 20px; height: 20px; display: none; place-items: center; padding-inline: 5px; }
+  .add.has .n { display: inline-grid; }
+  /* medidor de picante en las alitas */
+  .heat { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+  .heat-btns { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
+  .heat-btns button { border: 0; background: transparent; padding: 3px 9px; font-size: 13px; line-height: 1.4; }
+  .heat-btns button[aria-pressed="true"] { background: var(--chili); color: var(--white); }
+  .dish.hot-1 { background: #FFEFD9; } .dish.hot-2 { background: #FFD9C2; } .dish.hot-3 { background: #FFBFA6; animation: shake .35s ease 2; }
+  @keyframes shake { 25% { transform: translateX(-2px) rotate(-.4deg);} 75% { transform: translateX(2px) rotate(.4deg);} }
+
+  .mesa {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px);
+    background: var(--butter); color: var(--ink); border-radius: 24px; border: 2px solid var(--ink); padding: 20px;
+    box-shadow: 0 8px 0 var(--ink);
+  }
+  .mesa-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .mesa-head h3 { font-family: var(--f-display); font-weight: 400; font-size: 28px; }
+  .stepper { display: inline-flex; align-items: center; gap: 4px; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 2px; }
+  .stepper button { width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; }
+  .stepper button:hover { background: var(--butter); }
+  .stepper output { font-family: var(--f-mono); font-weight: 600; font-size: 13px; min-width: 70px; text-align: center; }
+  #table { width: 100%; max-width: 100%; height: auto; display: block; margin-block: 8px 4px; }
+  #table .shared { cursor: pointer; }
+  .pop-in { animation: popin .45s cubic-bezier(.3,1.7,.5,1) both; transform-box: fill-box; transform-origin: center; }
+  @keyframes popin { from { transform: scale(0) rotate(-40deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+  .meter { height: 10px; border-radius: 999px; background: var(--white); border: 1.5px solid var(--ink); overflow: hidden; }
+  .meter i { display: block; height: 100%; width: 0; background: var(--leaf); transition: width .35s ease, background .35s; }
+  .meter-label { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .meter-label span:last-child { font-family: var(--f-mono); font-size: 12px; }
+  .order { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 6px; max-height: 190px; overflow-y: auto; }
+  .order li { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 14px; padding: 6px 10px; background: var(--white); border-radius: 10px; border: 1px solid var(--line); }
+  .order li b { font-family: var(--f-mono); font-size: 12px; }
+  .order li button { border: 0; background: transparent; font-weight: 700; padding: 0 4px; }
+  .order-empty { font-size: 14px; color: var(--ink-soft); margin-top: 12px; }
+  .mesa-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  .mesa-actions .btn { justify-content: center; padding: 11px 12px; font-size: 14px; }
+  .mesa-actions .wide { grid-column: span 2; }
+  .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); transform: translate(-50%, 140%); background: var(--fern); color: var(--butter); padding: 12px 18px; border-radius: 12px; font-weight: 600; font-size: 15px; z-index: 80; visibility: hidden; transition: transform .3s cubic-bezier(.3,1.4,.5,1), visibility .3s; max-width: calc(100vw - 32px); }
+  .toast.show { transform: translate(-50%, 0); visibility: visible; }
+  .copy-fallback { width: 100%; margin-top: 10px; font: 13px/1.5 var(--f-mono); border: 1.5px solid var(--ink); border-radius: 10px; padding: 10px; background: var(--white); color: var(--ink); resize: vertical; }
+  @media (max-width: 1040px) { .carta-grid { grid-template-columns: 1fr; } .mesa { position: static; max-width: 560px; } }
+  @media (max-width: 620px) { .dishes { grid-template-columns: 1fr; } }
+
+  /* ---------- Reseñas ---------- */
+  .resenas { padding-block: clamp(64px, 9vw, 120px); }
+  .res-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(28px, 5vw, 72px); margin-top: 36px; align-items: start; }
+  .score { display: flex; align-items: center; gap: 18px; }
+  .score b { font-family: var(--f-display); font-weight: 400; font-size: clamp(84px, 11vw, 132px); line-height: .9; color: var(--fern); }
+  .score .stars { font-size: 26px; display: block; }
+  .score small { font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+  .mentions { margin-top: 30px; display: grid; gap: 10px; }
+  .mentions-title { font-weight: 700; font-size: 15px; }
+  .mention { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; width: 100%; text-align: left; background: transparent; border: 0; padding: 0; }
+  .mention .bar { position: relative; height: 44px; border-radius: 12px; border: 2px solid var(--ink); background: var(--white); overflow: hidden; display: flex; align-items: center; padding-inline: 14px; font-weight: 700; }
+  .mention .bar i { position: absolute; inset: 0 auto 0 0; background: var(--butter); transition: width .6s cubic-bezier(.3,1,.4,1), background .2s; z-index: 0; }
+  .mention .bar span { position: relative; }
+  .mention .num { font-family: var(--f-mono); font-weight: 600; font-size: 14px; min-width: 32px; text-align: right; font-variant-numeric: tabular-nums; }
+  .mention[aria-pressed="true"] .bar { background: var(--paper); }
+  .mention[aria-pressed="true"] .bar i { background: var(--chili); }
+  .mention[aria-pressed="true"] .bar span { color: var(--white); }
+  .quote-stage { background: var(--fern); color: var(--butter); border-radius: 24px; padding: clamp(24px, 4vw, 40px); border: 2px solid var(--ink); position: relative; min-height: 230px; display: grid; align-content: space-between; gap: 20px; }
+  .quote-stage blockquote { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(24px, 3vw, 36px); line-height: 1.12; }
+  .quote-stage blockquote::before { content: "“"; color: var(--chili); }
+  .quote-stage blockquote::after { content: "”"; color: var(--chili); }
+  .quote-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .quote-foot .mono { color: var(--butter-deep); }
+  .quote-stage .add { background: var(--butter); color: var(--ink); }
+  .fade { animation: fade .45s ease both; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+  .rcard { border: 2px solid var(--ink); border-radius: var(--radius); padding: 18px; background: var(--white); display: grid; gap: 10px; align-content: start; }
+  .rcard header { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: var(--white); flex: none; }
+  .rcard h3 { font-size: 15px; font-weight: 700; }
+  .rcard small { display: block; font-size: 12px; color: var(--ink-soft); }
+  .rcard p { font-size: 15px; }
+  @media (max-width: 900px) { .res-grid { grid-template-columns: 1fr; } .cards { grid-template-columns: 1fr; } }
+
+  /* ---------- Visítanos ---------- */
+  .visita { background: var(--butter); padding-block: clamp(64px, 9vw, 120px); border-top: 2px solid var(--ink); }
+  .visit-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; margin-top: 36px; }
+  .panel { background: var(--white); border: 2px solid var(--ink); border-radius: 24px; padding: clamp(20px, 3vw, 30px); }
+  .now { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; padding-bottom: 16px; border-bottom: 2px dashed var(--line); }
+  .now-state { font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); line-height: 1; }
+  .now-state.open { color: var(--leaf); } .now-state.closed { color: var(--chili); }
+  .now-count { font-family: var(--f-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .week { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+  .week li { display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 8px 10px; border-radius: 10px; font-size: 15px; }
+  .week li span:last-child { font-family: var(--f-mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .week li.today { background: var(--butter); font-weight: 700; }
+  .week li.off span:last-child { color: var(--ink-soft); }
+  .side { display: grid; gap: 16px; align-content: start; }
+  .addr { font-family: var(--f-display); font-weight: 400; font-size: 26px; line-height: 1.1; }
+  .addr-sub { margin-top: 8px; color: var(--ink-soft); font-size: 15px; }
+  .code { display: inline-block; margin-top: 10px; font-family: var(--f-mono); font-size: 12px; padding: 4px 8px; border-radius: 6px; background: var(--butter); }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .contact { display: grid; gap: 12px; }
+  .crow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px dashed var(--line); }
+  .crow:last-child { border-bottom: 0; padding-bottom: 0; }
+  .crow .k { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; }
+  .crow .v { font-weight: 700; font-size: 18px; user-select: all; }
+  .services { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .svc { font-size: 14px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--paper); }
+  .svc.pride { background: linear-gradient(90deg, #e04b3b, #f09a36, #f3d23b, #4fa65a, #3d7fd0, #7a4fb8); color: var(--white); border-color: var(--ink); text-shadow: 0 1px 1px rgba(0,0,0,.35); }
+  @media (max-width: 900px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  footer { background: var(--fern); color: var(--butter); padding-block: 40px calc(env(safe-area-inset-bottom, 0px) + 40px); }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
+  .foot .logo { font-size: 44px; color: var(--butter); }
+  .foot p { font-size: 14px; color: color-mix(in srgb, var(--butter) 75%, var(--fern)); }
+  .foot a { color: var(--butter); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#inicio" aria-label="Gallioli Bistrot, inicio"><span><span class="g">G</span>allioli</span><small>Bistrot</small></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#casa">La casa</a>
+      <a href="#carta">Carta</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#visita">Visítanos</a>
+    </nav>
+    <span class="status-pill" id="pill"><span class="dot"></span><span id="pill-text">Consultando horario…</span></span>
+    <a class="btn btn-primary btn-sm js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero" aria-label="Presentación">
+    <div class="wrap hero-in">
+      <div>
+        <p class="hero-tag"><span>Bistrot</span><span>Sant Gervasi</span><span>Barcelona</span></p>
+        <div class="wordmark" aria-label="Gallioli">
+          <span aria-hidden="true"><span class="g">G</span>allioli</span>
+          <svg class="drips" viewBox="0 0 600 48" preserveAspectRatio="none" aria-hidden="true">
+            <path class="drip" d="M40 0 h70 c0 10 -8 12 -12 22 c-4 12 -18 12 -22 0 c-3 -9 -10 -10 -12 -18 c-6 4 -18 2 -24 -4z"/>
+            <path class="drip" d="M190 0 h60 c-2 8 -10 10 -12 26 c-2 16 -22 16 -24 0 c-1 -12 -12 -14 -24 -26z"/>
+            <path class="drip" d="M340 0 h80 c-4 6 -12 8 -14 16 c-3 10 -16 10 -18 0 c-2 -6 -10 -6 -14 0 c-4 12 -18 10 -18 -2 c0 -8 -8 -10 -16 -14z"/>
+            <path class="drip" d="M500 0 h56 c-2 10 -12 14 -14 24 c-2 12 -20 12 -22 0 c-2 -10 -12 -14 -20 -24z"/>
+          </svg>
+        </div>
+        <h1 class="claim">Pollo a la brasa, croquetas y el allioli de la casa.</h1>
+        <p class="lead">Un bistrot de barrio lleno de plantas, para ir en pareja o con amigos, o para llevarte la cena a casa. Producto fresco y de proximidad.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa</a>
+          <a class="btn" href="#carta">Montar mi mesa</a>
+        </div>
+        <div class="facts">
+          <span class="fact"><span class="stars" aria-hidden="true">★</span><b>4,8</b> · 745 reseñas</span>
+          <span class="fact"><b>10–20 €</b> por persona</span>
+          <span class="fact">Comer aquí · Recoger · A domicilio</span>
+        </div>
+      </div>
+
+      <div class="plate-box">
+        <div class="plate-stage">
+          <canvas id="plate" aria-label="Plato interactivo: arrastra el dedo o el ratón para poner salsa sobre el pollo frito, las croquetas y las patatas de boniato" role="img"></canvas>
+          <span class="plate-hint" id="plate-hint">Arrastra para salsear</span>
+        </div>
+        <div class="sauces" role="group" aria-label="Elige la salsa">
+          <button class="sauce" data-sauce="allioli" aria-pressed="true"><i style="background:#FFF6D6"></i>Allioli</button>
+          <button class="sauce" data-sauce="brava" aria-pressed="false"><i style="background:#D8412A"></i>Brava</button>
+          <button class="sauce" data-sauce="gallitos" aria-pressed="false"><i style="background:#E4A43A"></i>Salsa Gallitos</button>
+          <button class="sauce clear" id="clear-plate">Plato limpio</button>
+        </div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Gallitos Fried Chicken</span><span>Croquetas Gallitos</span><span>Patatas de boniato</span><span>Pollo al carbón</span><span>Bravas</span><span>Alitas picantes</span><span>Canelón</span><span>Pastel de queso</span>
+        <span>Gallitos Fried Chicken</span><span>Croquetas Gallitos</span><span>Patatas de boniato</span><span>Pollo al carbón</span><span>Bravas</span><span>Alitas picantes</span><span>Canelón</span><span>Pastel de queso</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="casa" id="casa">
+    <div class="wrap casa-in">
+      <div>
+        <p class="eyebrow">La casa</p>
+        <h2 class="h2">Brasa, plantas y mesa para compartir.</h2>
+        <p class="lead">En la Ronda del General Mitre hay un comedor pequeño y cálido, con plantas naturales por todas partes. Aquí el pollo se hace al carbón, las croquetas salen de la cocina a ritmo constante y el allioli se hace en casa.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#F6E6A6" stroke="#13281C" stroke-width="2"/><path d="M14 30c2-8 6-9 8-16 2 7 6 8 8 16-2 3-14 3-16 0z" fill="#D8412A" stroke="#13281C" stroke-width="2" stroke-linejoin="round"/><path d="M19 30c1-4 2-5 3-8 1 3 2 4 3 8" fill="#E4A43A" stroke="#13281C" stroke-width="1.5"/></svg>
+            <div><h3>Al carbón</h3><p>Pollo asado a la brasa, entero o para compartir, con sus patatas.</p></div>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#F6E6A6" stroke="#13281C" stroke-width="2"/><path d="M22 34V16M22 22c-6-1-9-5-9-10 5 0 9 4 9 10zM22 26c5-1 9-4 9-9-5 0-9 3-9 9z" fill="#3C7A4E" stroke="#13281C" stroke-width="2" stroke-linejoin="round"/></svg>
+            <div><h3>Km 0</h3><p>Producto fresco y de proximidad, cocina de temporada.</p></div>
+          </div>
+          <div class="pillar">
+            <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#F6E6A6" stroke="#13281C" stroke-width="2"/><rect x="12" y="17" width="20" height="15" rx="3" fill="#FFFDF6" stroke="#13281C" stroke-width="2"/><path d="M17 17v-3a5 5 0 0 1 10 0v3" fill="none" stroke="#13281C" stroke-width="2"/><path d="M18 24h8" stroke="#D8412A" stroke-width="2" stroke-linecap="round"/></svg>
+            <div><h3>Para llevar, rápido</h3><p>Encarga, pasa a recoger o pídelo a domicilio.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="photos" aria-label="Galería (fotos pendientes)">
+        <div class="ph ph-a">
+          <svg class="leafy sway" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M190 10C120 20 60 60 40 150c40-10 70-30 90-60-10 30-30 50-50 70 60-10 100-70 110-150z" fill="#3C7A4E" stroke="#13281C" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M188 14C140 60 100 110 44 148" fill="none" stroke="#13281C" stroke-width="3"/>
+          </svg>
+          <span>Foto · El comedor</span>
+        </div>
+        <div class="ph ph-b"><span>Foto · Pollo asado</span></div>
+        <div class="ph ph-c"><span>Foto · Croquetas</span></div>
+        <div class="ph ph-d"><span>Foto · Boniato</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="carta" id="carta">
+    <div class="wrap">
+      <div class="carta-head">
+        <div>
+          <p class="eyebrow">La carta</p>
+          <h2 class="h2">Monta tu mesa.</h2>
+          <p class="lead">Añade platos y míralos llegar a la mesa. Luego copia la lista para encargarla por teléfono o tráela pensada cuando vengas.</p>
+        </div>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrar la carta">
+        <button class="filter" data-cat="all" aria-pressed="true">Todo</button>
+        <button class="filter" data-cat="picar" aria-pressed="false">Para picar</button>
+        <button class="filter" data-cat="pollo" aria-pressed="false">Pollo</button>
+        <button class="filter" data-cat="principales" aria-pressed="false">Principales</button>
+        <button class="filter" data-cat="postres" aria-pressed="false">Postres</button>
+      </div>
+      <div class="carta-grid">
+        <div class="dishes" id="dishes"></div>
+
+        <aside class="mesa" aria-label="Tu mesa">
+          <div class="mesa-head">
+            <h3>Tu mesa</h3>
+            <div class="stepper" aria-label="Número de personas">
+              <button id="less" aria-label="Una persona menos">−</button>
+              <output id="pax" aria-live="polite">2 personas</output>
+              <button id="more" aria-label="Una persona más">+</button>
+            </div>
+          </div>
+          <svg id="table" viewBox="0 0 400 400" role="img" aria-label="Vista de la mesa con los platos elegidos"></svg>
+          <div class="meter-label"><span id="meter-text">Elige unos platos para compartir</span><span id="meter-num">0 / 4</span></div>
+          <div class="meter"><i id="meter-bar"></i></div>
+          <ul class="order" id="order" aria-live="polite"></ul>
+          <p class="order-empty" id="order-empty">La mesa está vacía. Empieza por las croquetas, que son las que más se piden.</p>
+          <div class="mesa-actions">
+            <button class="btn btn-sm" id="copy-order">Copiar pedido</button>
+            <button class="btn btn-sm" id="reset-order">Vaciar mesa</button>
+            <a class="btn btn-primary btn-sm wide js-reserva" href="#" target="_blank" rel="noopener">Reservar para esta mesa</a>
+          </div>
+          <textarea class="copy-fallback" id="copy-fallback" rows="5" aria-label="Texto del pedido" hidden></textarea>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="resenas" id="resenas">
+    <div class="wrap">
+      <p class="eyebrow">Reseñas</p>
+      <h2 class="h2">Lo que más se pide.</h2>
+      <div class="res-grid">
+        <div>
+          <div class="score">
+            <b>4,8</b>
+            <div><span class="stars" aria-label="4,8 de 5 estrellas">★★★★★</span><small>745 reseñas en Google</small></div>
+          </div>
+          <div class="mentions">
+            <p class="mentions-title">Palabras que más aparecen en las reseñas</p>
+            <div id="mentions" role="group" aria-label="Menciones"></div>
+          </div>
+        </div>
+        <div>
+          <div class="quote-stage" id="quote-stage" aria-live="polite"></div>
+          <div class="cards">
+            <article class="rcard">
+              <header><span class="avatar" style="background:#3C7A4E">A</span><div><h3>Anna S.</h3><small>Local Guide · hace 5 meses</small></div></header>
+              <span class="stars" aria-label="5 estrellas">★★★★★</span>
+              <p>«Un ambiente encantador y acogedor, con una decoración impecable y hermosas plantas naturales. Perfecto tanto para una velada romántica como para reunirse con amigos.»</p>
+            </article>
+            <article class="rcard">
+              <header><span class="avatar" style="background:#D8412A">L</span><div><h3>Laura Ferrer</h3><small>Local Guide · hace 9 meses</small></div></header>
+              <span class="stars" aria-label="5 estrellas">★★★★★</span>
+              <p>«Hemos ido a encargar cena para llevar y en 15 minutos ya teníamos todo listo para recoger. Pollo al carbón con patatas y croquetas.»</p>
+            </article>
+            <article class="rcard">
+              <header><span class="avatar" style="background:#C98224">K</span><div><h3>Kath N.</h3><small>hace 9 meses</small></div></header>
+              <p>«Un sitio que se ha hecho popular en TikTok. El trato del personal es muy amable.»</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visita" id="visita">
+    <div class="wrap">
+      <p class="eyebrow">Visítanos</p>
+      <h2 class="h2">Te guardamos sitio.</h2>
+      <div class="visit-grid">
+        <div class="panel">
+          <div class="now">
+            <span class="now-state" id="now-state">…</span>
+            <span class="now-count" id="now-count"></span>
+          </div>
+          <ul class="week" id="week"></ul>
+        </div>
+        <div class="side">
+          <div class="panel">
+            <p class="addr">Ronda del General Mitre, 220</p>
+            <p class="addr-sub">08006 Barcelona · Sarrià-Sant Gervasi</p>
+            <span class="code">C44W+6P Barcelona</span>
+            <div class="row">
+              <a class="btn btn-sm" id="maps" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+              <a class="btn btn-primary btn-sm js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa</a>
+            </div>
+          </div>
+          <div class="panel contact">
+            <div class="crow">
+              <div><span class="k">Teléfono</span><span class="v" id="phone">932 22 77 38</span></div>
+              <button class="btn btn-sm" id="copy-phone">Copiar</button>
+            </div>
+            <div class="crow">
+              <div><span class="k">Instagram</span><span class="v">@galliolibistrot</span></div>
+              <a class="btn btn-sm" id="ig" href="#" target="_blank" rel="noopener">Abrir</a>
+            </div>
+            <div class="crow">
+              <div class="services">
+                <span class="svc">Comer aquí</span><span class="svc">Recogida sin entrar</span><span class="svc">A domicilio</span><span class="svc pride">LGBTQ+ friendly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <span class="logo"><span><span class="g" style="color:var(--chili)">G</span>allioli</span></span>
+      <p>Bistrot · Ronda del General Mitre, 220 · Barcelona</p>
+    </div>
+    <p>932 22 77 38 · <a href="https://www.instagram.com/galliolibistrot/" target="_blank" rel="noopener">@galliolibistrot</a></p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  /* ===== Enlaces (cambiar aquí si hace falta) ===== */
+  const LINKS = {
+    reserva: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona", // TODO: enlace directo de last.app
+    maps: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona",
+    instagram: "https://www.instagram.com/galliolibistrot/"
+  };
+  document.querySelectorAll(".js-reserva").forEach(a => a.href = LINKS.reserva);
+  document.getElementById("maps").href = LINKS.maps;
+  document.getElementById("ig").href = LINKS.instagram;
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = s => document.querySelector(s);
+  const toastEl = $("#toast");
+  let toastT;
+  const toast = msg => { toastEl.textContent = msg; toastEl.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 2200); };
+
+  /* ===== Horario (hora de Barcelona) ===== */
+  const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  const L = [750, 960], D = [1200, 1380]; // 12:30–16:00, 20:00–23:00
+  const HOURS = { 0: [L], 1: [], 2: [L], 3: [L, D], 4: [L, D], 5: [L, D], 6: [L, D] };
+  const hhmm = m => String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0");
+  function bcnNow() {
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Madrid", weekday: "short", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).formatToParts(new Date());
+    const get = t => parts.find(p => p.type === t).value;
+    const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday"));
+    const h = +get("hour") % 24, mi = +get("minute"), s = +get("second");
+    return { day, min: h * 60 + mi, sec: s };
+  }
+  function status() {
+    const { day, min, sec } = bcnNow();
+    const cur = HOURS[day].find(([a, b]) => min >= a && min < b);
+    if (cur) return { open: true, text: "Abierto · cierra a las " + hhmm(cur[1]), left: (cur[1] - min) * 60 - sec, label: "para el cierre", day };
+    for (let k = 0; k < 8; k++) {
+      const d = (day + k) % 7;
+      const next = HOURS[d].find(([a]) => k > 0 || a > min);
+      if (next) {
+        const when = k === 0 ? "hoy" : k === 1 ? "mañana" : "el " + DAYS[d].toLowerCase();
+        return { open: false, text: "Cerrado · abre " + when + " a las " + hhmm(next[0]), left: (k * 1440 + next[0] - min) * 60 - sec, label: "para abrir", day };
+      }
+    }
+  }
+  const weekEl = $("#week");
+  [2, 3, 4, 5, 6, 0, 1].forEach(d => {
+    const li = document.createElement("li");
+    li.dataset.day = d;
+    const h = HOURS[d];
+    if (!h.length) li.classList.add("off");
+    li.innerHTML = `<span>${DAYS[d]}</span><span>${h.length ? h.map(([a, b]) => hhmm(a) + "–" + hhmm(b)).join(" · ") : "Cerrado"}</span>`;
+    weekEl.appendChild(li);
+  });
+  function tickStatus() {
+    const s = status();
+    $("#pill").classList.toggle("is-open", s.open);
+    $("#pill-text").textContent = s.text;
+    const st = $("#now-state");
+    st.textContent = s.open ? "Abierto ahora" : "Ahora cerrado";
+    st.className = "now-state " + (s.open ? "open" : "closed");
+    const t = Math.max(0, s.left), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), sc = t % 60;
+    $("#now-count").textContent = (h ? h + " h " : "") + String(m).padStart(2, "0") + " min " + String(sc).padStart(2, "0") + " s " + s.label;
+    weekEl.querySelectorAll("li").forEach(li => li.classList.toggle("today", +li.dataset.day === s.day));
+  }
+  tickStatus(); setInterval(tickStatus, 1000);
+
+  /* ===== Copiar ===== */
+  async function copyText(text, fallbackEl) {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch (e) {
+      if (fallbackEl) { fallbackEl.hidden = false; fallbackEl.value = text; fallbackEl.focus(); fallbackEl.select(); }
+      return false;
+    }
+  }
+  $("#copy-phone").addEventListener("click", async () => {
+    const ok = await copyText("932 22 77 38");
+    if (ok) toast("Teléfono copiado: 932 22 77 38");
+    else { const r = document.createRange(); r.selectNodeContents($("#phone")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast("Número seleccionado, cópialo con tu teclado"); }
+  });
+
+  /* ===== Plato interactivo (hero) ===== */
+  const SAUCES = {
+    allioli: { base: "#FFF6D6", hi: "rgba(255,255,255,.9)", edge: "rgba(160,130,60,.35)", fleck: "#E9DDB0" },
+    brava: { base: "#D8412A", hi: "rgba(255,190,160,.7)", edge: "rgba(90,20,10,.35)", fleck: "#A92E1B" },
+    gallitos: { base: "#E4A43A", hi: "rgba(255,236,190,.8)", edge: "rgba(110,60,10,.35)", fleck: "#B87818" }
+  };
+  let sauce = "allioli";
+  const canvas = $("#plate"), ctx = canvas.getContext("2d");
+  const food = document.createElement("canvas"), fctx = food.getContext("2d");
+  let W = 0, dpr = 1, strokes = [], active = null;
+
+  function rng(seed) { return () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+
+  function drawFood() {
+    food.width = canvas.width; food.height = canvas.height;
+    const c = fctx, r = rng(7), S = W / 500;
+    c.setTransform(dpr * S, 0, 0, dpr * S, 0, 0);
+    // plato
+    c.fillStyle = "rgba(19,40,28,.18)"; c.beginPath(); c.arc(254, 262, 236, 0, 7); c.fill();
+    c.fillStyle = "#FFFDF6"; c.strokeStyle = "#13281C"; c.lineWidth = 4;
+    c.beginPath(); c.arc(250, 250, 236, 0, 7); c.fill(); c.stroke();
+    c.strokeStyle = "rgba(19,40,28,.12)"; c.lineWidth = 2; c.beginPath(); c.arc(250, 250, 196, 0, 7); c.stroke();
+    // borde del plato con motivo de hojas
+    for (let i = 0; i < 28; i++) {
+      const a = i / 28 * Math.PI * 2, x = 250 + Math.cos(a) * 216, y = 250 + Math.sin(a) * 216;
+      c.save(); c.translate(x, y); c.rotate(a + Math.PI / 2);
+      c.fillStyle = i % 2 ? "#3C7A4E" : "#9CBF8E";
+      c.beginPath(); c.ellipse(0, 0, 4, 9, 0, 0, 7); c.fill(); c.restore();
+    }
+    // patatas de boniato
+    for (let i = 0; i < 16; i++) {
+      const x = 140 + r() * 120, y = 250 + r() * 110, a = -0.9 + r() * 1.8, len = 70 + r() * 40;
+      c.save(); c.translate(x, y); c.rotate(a);
+      c.fillStyle = "#B5501D"; roundRect(c, -len / 2 + 2, -8 + 3, len, 16, 5); c.fill();
+      c.fillStyle = "#E07A2E"; c.strokeStyle = "#13281C"; c.lineWidth = 2; roundRect(c, -len / 2, -8, len, 16, 5); c.fill(); c.stroke();
+      c.fillStyle = "rgba(255,210,150,.55)"; roundRect(c, -len / 2 + 5, -5, len - 14, 4, 2); c.fill();
+      c.restore();
+    }
+    // croquetas
+    [[330, 330, .4], [360, 280, -.2], [300, 375, 1.1]].forEach(([x, y, a]) => {
+      c.save(); c.translate(x, y); c.rotate(a);
+      const g = c.createRadialGradient(-10, -8, 4, 0, 0, 40); g.addColorStop(0, "#E9B25A"); g.addColorStop(1, "#A8641C");
+      c.fillStyle = g; c.strokeStyle = "#13281C"; c.lineWidth = 2.5;
+      c.beginPath(); c.ellipse(0, 0, 38, 22, 0, 0, 7); c.fill(); c.stroke();
+      c.fillStyle = "rgba(90,45,10,.55)";
+      for (let k = 0; k < 40; k++) { const u = r() * 7, v = r(); c.fillRect(Math.cos(u) * 34 * v, Math.sin(u) * 19 * v, 2, 2); }
+      c.restore();
+    });
+    // pollo frito
+    [[270, 150, 64, 1], [345, 195, 52, 2], [190, 170, 48, 3]].forEach(([x, y, rad, s]) => {
+      const rr = rng(s * 31); const pts = [];
+      for (let k = 0; k < 16; k++) { const a = k / 16 * Math.PI * 2; const d = rad * (0.78 + rr() * 0.32) * (k % 4 === 0 ? 1.08 : 1); pts.push([x + Math.cos(a) * d * 1.15, y + Math.sin(a) * d * .85]); }
+      c.fillStyle = "rgba(19,40,28,.18)"; blob(c, pts.map(([px, py]) => [px + 4, py + 6])); c.fill();
+      const g = c.createRadialGradient(x - rad * .3, y - rad * .3, 6, x, y, rad * 1.2); g.addColorStop(0, "#F0BE62"); g.addColorStop(.6, "#C98224"); g.addColorStop(1, "#8A4E14");
+      c.fillStyle = g; c.strokeStyle = "#13281C"; c.lineWidth = 3; blob(c, pts); c.fill(); c.stroke();
+      c.fillStyle = "rgba(255,226,160,.6)";
+      for (let k = 0; k < 60; k++) { const u = rr() * 7, v = Math.sqrt(rr()) * rad * .85; c.beginPath(); c.arc(x + Math.cos(u) * v * 1.1, y + Math.sin(u) * v * .8, 1.5 + rr() * 2.5, 0, 7); c.fill(); }
+      c.fillStyle = "rgba(90,45,10,.35)";
+      for (let k = 0; k < 40; k++) { const u = rr() * 7, v = Math.sqrt(rr()) * rad * .9; c.fillRect(x + Math.cos(u) * v, y + Math.sin(u) * v * .8, 2.5, 2.5); }
+    });
+    // perejil
+    for (let i = 0; i < 9; i++) { const x = 160 + r() * 200, y = 130 + r() * 250; c.fillStyle = i % 2 ? "#3C7A4E" : "#2B5E3B"; c.beginPath(); c.ellipse(x, y, 5, 3, r() * 3, 0, 7); c.fill(); }
+  }
+  function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+  function blob(c, pts) {
+    c.beginPath();
+    const n = pts.length, mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    let m = mid(pts[n - 1], pts[0]); c.moveTo(m[0], m[1]);
+    for (let i = 0; i < n; i++) { const p = pts[i], q = mid(p, pts[(i + 1) % n]); c.quadraticCurveTo(p[0], p[1], q[0], q[1]); }
+    c.closePath();
+  }
+
+  function drawStroke(c, st) {
+    const p = st.pts; if (p.length < 2) return;
+    const s = SAUCES[st.sauce], S = W / 500;
+    const path = () => { c.beginPath(); c.moveTo(p[0][0], p[0][1]); for (let i = 1; i < p.length - 1; i++) { const mx = (p[i][0] + p[i + 1][0]) / 2, my = (p[i][1] + p[i + 1][1]) / 2; c.quadraticCurveTo(p[i][0], p[i][1], mx, my); } c.lineTo(p[p.length - 1][0], p[p.length - 1][1]); };
+    c.lineCap = "round"; c.lineJoin = "round";
+    c.save(); c.translate(1.5 * S, 3 * S); c.strokeStyle = s.edge; c.lineWidth = 15 * S; path(); c.stroke(); c.restore();
+    c.strokeStyle = s.base; c.lineWidth = 13 * S; path(); c.stroke();
+    c.save(); c.translate(-2 * S, -2.5 * S); c.strokeStyle = s.hi; c.lineWidth = 3.5 * S; path(); c.stroke(); c.restore();
+    if (st.sauce === "allioli") { // motitas de ajo
+      c.fillStyle = s.fleck;
+      for (let i = 2; i < p.length; i += 5) c.fillRect(p[i][0] + (i % 3 - 1) * 3 * S, p[i][1] + (i % 2 ? 2 : -2) * S, 2 * S, 2 * S);
+    }
+  }
+  function render() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(food, 0, 0);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.save(); ctx.beginPath(); ctx.arc(W / 2, W / 2, W * 0.472, 0, 7); ctx.clip();
+    strokes.forEach(st => drawStroke(ctx, st));
+    ctx.restore();
+  }
+  function resize() {
+    const w = canvas.getBoundingClientRect().width; if (!w) return;
+    const old = W; W = w; dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(W * dpr);
+    if (old && old !== W) { const k = W / old; strokes.forEach(st => st.pts = st.pts.map(([x, y]) => [x * k, y * k])); }
+    drawFood(); render();
+  }
+  const pos = e => { const b = canvas.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  canvas.addEventListener("pointerdown", e => { canvas.setPointerCapture(e.pointerId); active = { sauce, pts: [pos(e)] }; strokes.push(active); $("#plate-hint").style.opacity = 0; if (strokes.length > 60) strokes.shift(); });
+  canvas.addEventListener("pointermove", e => {
+    if (!active) return;
+    const p = pos(e), last = active.pts[active.pts.length - 1];
+    if (Math.hypot(p[0] - last[0], p[1] - last[1]) > 3) { active.pts.push(p); render(); }
+  });
+  const end = () => { if (active && active.pts.length === 1) { const [x, y] = active.pts[0]; active.pts.push([x + 1, y + 1]); render(); } active = null; };
+  canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+  document.querySelectorAll(".sauce[data-sauce]").forEach(b => b.addEventListener("click", () => {
+    sauce = b.dataset.sauce;
+    document.querySelectorAll(".sauce[data-sauce]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  }));
+  $("#clear-plate").addEventListener("click", () => { strokes = []; render(); $("#plate-hint").style.opacity = 1; });
+
+  // chorrito inicial: zigzag de allioli sobre el pollo
+  function demoPath() {
+    const pts = [], S = W / 500;
+    for (let t = 0; t <= 1; t += 0.012) {
+      const x = (150 + t * 240) * S, y = (140 + Math.sin(t * Math.PI * 7) * 38 + t * 70) * S;
+      pts.push([x, y]);
+    }
+    return pts;
+  }
+  function demo() {
+    const all = demoPath(), st = { sauce: "allioli", pts: [] };
+    strokes.push(st);
+    if (reduce) { st.pts = all; render(); return; }
+    let i = 0;
+    const step = () => { st.pts.push(all[i++]); render(); if (i < all.length) requestAnimationFrame(step); };
+    step();
+  }
+  new ResizeObserver(resize).observe(canvas);
+  requestAnimationFrame(() => { resize(); demo(); });
+
+  /* ===== Carta ===== */
+  const MENU = [
+    { id: "gallitos", n: "Gallitos Fried Chicken", c: "pollo", d: "El pollo frito de la casa: rebozado crujiente, carne jugosa y su salsa, que sale en muchas reseñas.", tags: [["Popular", "pop"], ["33 reseñas", "rev"]], col: "#C98224", ab: "GFC" },
+    { id: "croquetas", n: "Croquetas Gallitos", c: "picar", d: "Las más nombradas por los clientes. Cremosas por dentro, doradas por fuera.", tags: [["Popular", "pop"], ["48 reseñas", "rev"]], col: "#A8641C", ab: "CRO" },
+    { id: "pollo", n: "Pollo al carbón", c: "pollo", d: "Pollo asado a la brasa de carbón, con patatas. También para llevar.", tags: [], col: "#8A4E14", ab: "PAC" },
+    { id: "alitas", n: "Alitas picantes", c: "pollo", d: "Para quien pide más picante. Elige cuánto aguantas.", tags: [["Picante", "hot"]], col: "#D8412A", ab: "ALI", heat: true },
+    { id: "bravas", n: "Patatas bravas", c: "picar", d: "Un clásico que los clientes recomiendan junto a las croquetas.", tags: [], col: "#E0612E", ab: "BRA" },
+    { id: "boniato", n: "Patatas de boniato", c: "picar", d: "«Riquísimas», según las reseñas. Dulces y crujientes.", tags: [["33 reseñas", "rev"]], col: "#E07A2E", ab: "BON" },
+    { id: "burrata", n: "Burrata", c: "picar", d: "Burrata cremosa para compartir.", tags: [], col: "#E9E2C8", ab: "BUR", dark: true },
+    { id: "arancini", n: "Arancini", c: "picar", d: "Bolitas de arroz fritas, doradas y crujientes.", tags: [], col: "#D69B3C", ab: "ARA" },
+    { id: "fritas", n: "Patatas fritas", c: "picar", d: "Para acompañar el pollo, o para picar sin más.", tags: [], col: "#EDC255", ab: "PAT", dark: true },
+    { id: "burger", n: "Hamburguesa", c: "principales", d: "«Espectacular», dicen quienes la han probado.", tags: [], col: "#6B3B1F", ab: "HAM" },
+    { id: "canelon", n: "Canelón", c: "principales", d: "Uno de los platos más comentados de la casa.", tags: [["29 reseñas", "rev"]], col: "#B8732F", ab: "CAN" },
+    { id: "cheesecake", n: "Pastel de queso", c: "postres", d: "Para terminar la cena.", tags: [], col: "#F2D98A", ab: "PQ", dark: true }
+  ];
+  const byId = Object.fromEntries(MENU.map(m => [m.id, m]));
+  const HEAT = ["Suave", "Picante", "Muy picante", "Fuego"];
+  let heat = 1;
+  const order = new Map(); // id -> cantidad
+  let pax = 2;
+
+  const dishesEl = $("#dishes");
+  MENU.forEach(m => {
+    const el = document.createElement("article");
+    el.className = "dish"; el.dataset.cat = m.c; el.dataset.id = m.id;
+    el.innerHTML = `
+      <div class="dish-top"><h3>${m.n}</h3><span class="swatch" style="background:${m.col};${m.dark ? "color:#13281C" : ""}" aria-hidden="true">${m.ab}</span></div>
+      <div style="display:grid;gap:10px;align-content:start">
+        <p>${m.d}</p>
+        ${m.tags.length ? `<div class="tags">${m.tags.map(([t, k]) => `<span class="tag ${k}">${t}</span>`).join("")}</div>` : ""}
+        ${m.heat ? `<div class="heat"><span>Nivel:</span><span class="heat-btns" role="group" aria-label="Nivel de picante">${HEAT.map((h, i) => `<button data-h="${i}" aria-pressed="${i === heat}" title="${h}">${"🌶".repeat(i) || "0"}</button>`).join("")}</span></div>` : ""}
+      </div>
+      <div class="dish-foot"><span class="price" title="Precio pendiente de confirmar">— €</span><button class="add" data-add="${m.id}" aria-label="Añadir ${m.n} a la mesa">+ Añadir <span class="n">0</span></button></div>`;
+    dishesEl.appendChild(el);
+  });
+  dishesEl.addEventListener("click", e => {
+    const add = e.target.closest("[data-add]");
+    if (add) { addDish(add.dataset.add); return; }
+    const h = e.target.closest("[data-h]");
+    if (h) {
+      heat = +h.dataset.h;
+      const card = h.closest(".dish");
+      card.querySelectorAll("[data-h]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.h === heat));
+      card.classList.remove("hot-1", "hot-2", "hot-3");
+      void card.offsetWidth;
+      if (heat) card.classList.add("hot-" + heat);
+      toast("Alitas: " + HEAT[heat].toLowerCase());
+      renderOrder();
+    }
+  });
+  document.querySelectorAll(".filter").forEach(f => f.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach(x => x.setAttribute("aria-pressed", x === f));
+    const cat = f.dataset.cat;
+    dishesEl.querySelectorAll(".dish").forEach(d => d.hidden = !(cat === "all" || d.dataset.cat === cat));
+  }));
+
+  function addDish(id) {
+    order.set(id, (order.get(id) || 0) + 1);
+    renderOrder(id);
+    toast(byId[id].n + " a la mesa");
+  }
+  function removeDish(id) {
+    const q = (order.get(id) || 0) - 1;
+    if (q <= 0) order.delete(id); else order.set(id, q);
+    renderOrder();
+  }
+
+  const SVGNS = "http://www.w3.org/2000/svg";
+  const tableEl = $("#table");
+  function svg(tag, attrs, parent) { const el = document.createElementNS(SVGNS, tag); for (const k in attrs) el.setAttribute(k, attrs[k]); parent && parent.appendChild(el); return el; }
+  function drawTable(fresh) {
+    tableEl.innerHTML = "";
+    // sillas y cubiertos
+    for (let i = 0; i < pax; i++) {
+      const a = -Math.PI / 2 + i / pax * Math.PI * 2, x = 200 + Math.cos(a) * 178, y = 200 + Math.sin(a) * 178;
+      svg("circle", { cx: x, cy: y, r: 20, fill: "#3C7A4E", stroke: "#13281C", "stroke-width": 2.5 }, tableEl);
+    }
+    svg("circle", { cx: 204, cy: 206, r: 158, fill: "rgba(19,40,28,.2)" }, tableEl);
+    svg("circle", { cx: 200, cy: 200, r: 158, fill: "#FFFDF6", stroke: "#13281C", "stroke-width": 3 }, tableEl);
+    svg("circle", { cx: 200, cy: 200, r: 146, fill: "none", stroke: "#F6E6A6", "stroke-width": 6, "stroke-dasharray": "2 10", "stroke-linecap": "round" }, tableEl);
+    for (let i = 0; i < pax; i++) {
+      const a = -Math.PI / 2 + i / pax * Math.PI * 2, x = 200 + Math.cos(a) * 128, y = 200 + Math.sin(a) * 128;
+      svg("circle", { cx: x, cy: y, r: 17, fill: "#FFFFFF", stroke: "#13281C", "stroke-width": 2 }, tableEl);
+      svg("circle", { cx: x, cy: y, r: 10, fill: "none", stroke: "rgba(19,40,28,.25)", "stroke-width": 1.5 }, tableEl);
+    }
+    // platos compartidos en espiral
+    const items = [];
+    order.forEach((q, id) => { for (let k = 0; k < q; k++) items.push(id); });
+    const n = items.length;
+    const sz = n > 12 ? 17 : n > 7 ? 21 : 26;
+    items.forEach((id, i) => {
+      const m = byId[id];
+      let x = 200, y = 200;
+      if (n > 1) { const a = i * 2.39996, rr = 22 * Math.sqrt(i + (n > 1 ? .6 : 0)) * (sz / 26) * 1.55; x += Math.cos(a) * Math.min(rr, 88); y += Math.sin(a) * Math.min(rr, 88); }
+      const g = svg("g", { class: "shared" + (fresh === id && i === items.lastIndexOf(id) ? " pop-in" : ""), tabindex: 0, role: "button", "aria-label": "Quitar " + m.n }, tableEl);
+      svg("circle", { cx: x + 2, cy: y + 3, r: sz + 6, fill: "rgba(19,40,28,.18)" }, g);
+      svg("circle", { cx: x, cy: y, r: sz + 6, fill: "#FFFFFF", stroke: "#13281C", "stroke-width": 2 }, g);
+      svg("circle", { cx: x, cy: y, r: sz, fill: m.col, stroke: "#13281C", "stroke-width": 1.5 }, g);
+      const t = svg("text", { x, y: y + 3.5, "text-anchor": "middle", "font-family": "Martian Mono, monospace", "font-size": sz > 20 ? 10 : 8, "font-weight": 600, fill: m.dark ? "#13281C" : "#FFFDF6" }, g);
+      t.textContent = m.ab;
+      const title = svg("title", {}, g); title.textContent = m.n + " (toca para quitar)";
+      g.addEventListener("click", () => removeDish(id));
+      g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); removeDish(id); } });
+    });
+    if (!n) {
+      const t = svg("text", { x: 200, y: 206, "text-anchor": "middle", "font-family": "Bagel Fat One, sans-serif", "font-size": 26, fill: "rgba(19,40,28,.35)" }, tableEl);
+      t.textContent = "Mesa libre";
+    }
+  }
+  function renderOrder(fresh) {
+    const n = [...order.values()].reduce((a, b) => a + b, 0);
+    const target = pax * 2;
+    $("#pax").textContent = pax + (pax === 1 ? " persona" : " personas");
+    $("#meter-num").textContent = n + " / " + target;
+    const pct = Math.min(100, n / target * 100);
+    const bar = $("#meter-bar");
+    bar.style.width = pct + "%";
+    bar.style.background = n > target + 2 ? "var(--chili)" : n >= target ? "var(--leaf)" : "var(--crust)";
+    $("#meter-text").textContent = !n ? "Sugerencia: unos 2 platos por persona" : n < target ? "Faltan " + (target - n) + " para ir bien servidos" : n <= target + 2 ? "Mesa completa. ¡Buen provecho!" : "Mucha comida… ¿seguro?";
+    const list = $("#order"); list.innerHTML = "";
+    order.forEach((q, id) => {
+      const li = document.createElement("li");
+      const extra = id === "alitas" ? " · " + HEAT[heat].toLowerCase() : "";
+      li.innerHTML = `<span><b>${q}×</b> ${byId[id].n}${extra}</span><button aria-label="Quitar una ración de ${byId[id].n}">−</button>`;
+      li.querySelector("button").addEventListener("click", () => removeDish(id));
+      list.appendChild(li);
+    });
+    $("#order-empty").hidden = n > 0;
+    dishesEl.querySelectorAll("[data-add]").forEach(b => { const q = order.get(b.dataset.add) || 0; b.classList.toggle("has", q > 0); b.querySelector(".n").textContent = q; });
+    drawTable(fresh);
+  }
+  $("#less").addEventListener("click", () => { if (pax > 1) { pax--; renderOrder(); } });
+  $("#more").addEventListener("click", () => { if (pax < 8) { pax++; renderOrder(); } });
+  $("#reset-order").addEventListener("click", () => { order.clear(); renderOrder(); $("#copy-fallback").hidden = true; });
+  $("#copy-order").addEventListener("click", async () => {
+    if (!order.size) { toast("Añade algún plato primero"); return; }
+    const lines = [];
+    order.forEach((q, id) => lines.push(`${q}× ${byId[id].n}${id === "alitas" ? " (" + HEAT[heat].toLowerCase() + ")" : ""}`));
+    const text = `Hola, Gallioli. Mesa para ${pax}:\n` + lines.join("\n");
+    const ok = await copyText(text, $("#copy-fallback"));
+    toast(ok ? "Pedido copiado. Llama al 932 22 77 38" : "Selecciona el texto de abajo y cópialo");
+  });
+  // mesa de ejemplo para que no se vea vacía al cargar
+  order.set("croquetas", 1); order.set("gallitos", 1); order.set("boniato", 1);
+  renderOrder();
+
+  /* ===== Reseñas ===== */
+  const MENTIONS = [
+    { k: "croquetas", n: 48, dish: "croquetas", q: "Os recomiendo las croquetas y las bravas, y si os va el picante, las alitas.", who: "Resumen de reseñas de Google" },
+    { k: "boniato", n: 33, dish: "boniato", q: "Muy rico todo, las patatas de boniato riquísimas y la hamburguesa espectacular.", who: "Resumen de reseñas de Google" },
+    { k: "fried chicken", n: 33, dish: "gallitos", q: "La comida es buenísima, la salsa del pollo frito es muy rica!", who: "Resumen de reseñas de Google" },
+    { k: "canelón", n: 29, dish: "canelon", q: "El canelón aparece en 29 reseñas. Pruébalo y nos cuentas.", who: "Menciones en Google" }
+  ];
+  const mentionsEl = $("#mentions");
+  MENTIONS.forEach((m, i) => {
+    const b = document.createElement("button");
+    b.className = "mention"; b.setAttribute("aria-pressed", i === 0);
+    b.innerHTML = `<span class="bar"><i style="width:0"></i><span>${m.k}</span></span><span class="num">${m.n}</span>`;
+    b.addEventListener("click", () => showMention(i));
+    mentionsEl.appendChild(b);
+  });
+  requestAnimationFrame(() => mentionsEl.querySelectorAll(".bar i").forEach((el, i) => el.style.width = (MENTIONS[i].n / 48 * 100) + "%"));
+  const stage = $("#quote-stage");
+  function showMention(i) {
+    const m = MENTIONS[i];
+    mentionsEl.querySelectorAll(".mention").forEach((b, j) => b.setAttribute("aria-pressed", i === j));
+    stage.innerHTML = `<blockquote class="fade">${m.q}</blockquote>
+      <div class="quote-foot fade"><span class="mono">${m.who} · «${m.k}» en ${m.n} reseñas</span><button class="add" data-q="${m.dish}">+ ${byId[m.dish].n}</button></div>`;
+    stage.querySelector("[data-q]").addEventListener("click", () => addDish(m.dish));
+  }
+  showMention(0);
+})();
+</script>
