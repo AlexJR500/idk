@@ -49,7 +49,7 @@
   .btn {
     position: relative; display: inline-flex; align-items: center; gap: 12px; overflow: hidden;
     padding: 15px 26px; border-radius: 999px; font-weight: 600; font-size: 15px; letter-spacing: .01em;
-    text-decoration: none; border: 1px solid currentColor; isolation: isolate;
+    text-decoration: none; border: 1px solid currentColor; isolation: isolate; background: transparent;
     transition: color .45s var(--ease), border-color .45s var(--ease);
   }
   .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--allioli); transform: translateY(101%); border-radius: inherit; transition: transform .45s var(--ease); }
@@ -131,6 +131,25 @@
   .manifesto .w { display: inline; }
   .manifesto em { font-style: italic; color: var(--chili); }
 
+  .manifesto { position: relative; overflow: hidden; }
+  .manifesto .wrap { position: relative; z-index: 1; }
+  .ghost { position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-family: var(--f-display); font-weight: 900; font-size: 32vw; line-height: .8; white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px rgba(15,42,30,.09); pointer-events: none; user-select: none; }
+  .manifesto mark { color: inherit; background: linear-gradient(var(--allioli), var(--allioli)) no-repeat 0 88% / 100% 40%; padding-inline: .05em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .pic { display: inline-block; width: 1.9em; height: .92em; border-radius: 999px; vertical-align: -.1em; overflow: hidden; margin-inline: .05em; }
+  .pic svg { width: 100%; height: 100%; display: block; }
+  .pic-ember { background: var(--fern); }
+  .pic-ember circle { animation: flicker 1.8s ease-in-out infinite; }
+  .pic-ember circle:nth-child(2) { animation-delay: .5s; } .pic-ember circle:nth-child(3) { animation-delay: 1s; }
+  @keyframes flicker { 50% { opacity: .3; } }
+  .pic-croq { background: var(--allioli); }
+  .pic-oli { background: #F7EFCB; box-shadow: inset 0 0 0 1.5px rgba(15,42,30,.18); }
+  .pic-leaf { background: #3F7D56; }
+  .sign { display: flex; align-items: center; gap: 14px; margin-top: 44px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .sign::before { content: ""; width: 48px; height: 1px; background: var(--chili); }
+  .m-leaf { position: absolute; right: -30px; top: 8%; width: clamp(150px, 22vw, 330px); height: auto; pointer-events: none; }
+  .m-leaf.b { right: auto; left: -60px; top: auto; bottom: -6%; width: clamp(110px, 13vw, 210px); opacity: .75; }
+  @media (max-width: 760px) { .m-leaf { width: 120px; top: -10px; right: -40px; opacity: .5; } .m-leaf.b { display: none; } }
+
   /* ---------- La casa ---------- */
   .casa { padding-bottom: clamp(80px, 12vw, 160px); }
   .casa-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
@@ -194,6 +213,37 @@
     .plate { max-width: 260px; order: -1; }
   }
 
+  /* ---------- Gall + allioli (mortero) ---------- */
+  .aioli { background: var(--allioli); color: var(--fern); position: relative; overflow: hidden; }
+  .aioli-in { padding-block: clamp(72px, 10vw, 120px); display: grid; gap: clamp(20px, 3vw, 36px); }
+  .aioli .eyebrow { opacity: .7; }
+  .equation { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: clamp(40px, 10vw, 150px); line-height: .85; white-space: nowrap; display: flex; align-items: baseline; }
+  .eq-w1, .eq-w2 { display: inline-flex; }
+  .eq-w2 { color: var(--chili); }
+  .equation .l, .eq-plus { display: inline-block; overflow: hidden; }
+  .eq-plus { padding-inline: .16em; opacity: .45; font-weight: 800; }
+  .aioli-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; min-height: 0; }
+  .mortar { width: 100%; max-width: 460px; max-height: 100%; height: auto; justify-self: center; overflow: visible; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+  .step .num { font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; }
+  .step h3 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(34px, 4vw, 58px); line-height: .9; margin-top: 8px; }
+  .step p { font-family: var(--f-serif); font-style: italic; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.3; margin-top: 12px; max-width: 30ch; }
+  .seq-bar { display: none; gap: 8px; margin-top: 26px; max-width: 360px; }
+  .seq-bar i { flex: 1; height: 3px; background: rgba(15,42,30,.18); position: relative; overflow: hidden; border-radius: 2px; }
+  .seq-bar b { position: absolute; inset: 0; background: var(--fern); transform-origin: left; transform: scaleX(0); }
+  .aioli.js-seq { height: 100vh; }
+  .aioli.js-seq .aioli-in { height: 100%; padding-block: 92px 32px; grid-template-rows: auto auto minmax(0, 1fr); }
+  .aioli.js-seq .steps { position: relative; min-height: 230px; display: block; }
+  .aioli.js-seq .step { position: absolute; left: 0; top: 0; right: 0; }
+  .aioli.js-seq .seq-bar { display: flex; }
+  @media (max-width: 900px) {
+    .aioli-grid { grid-template-columns: 1fr; align-content: start; }
+    .mortar { max-width: 250px; }
+    .aioli.js-seq .aioli-in { padding-block: 78px 24px; }
+    .aioli.js-seq .aioli-grid { gap: 8px; }
+    .aioli.js-seq .steps { min-height: 190px; }
+  }
+
   /* ---------- Carta ---------- */
   .carta { padding-block: clamp(80px, 12vw, 160px); }
   .carta-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
@@ -210,6 +260,31 @@
   .tag { font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; background: var(--allioli); color: var(--fern); margin-left: 8px; vertical-align: 3px; }
   .tag.hot { background: var(--chili); color: var(--bone); }
   @media (max-width: 760px) { .menu { grid-template-columns: 1fr; } }
+
+  /* ---------- Tres maneras ---------- */
+  .modos { background: var(--fern); color: var(--bone); padding-block: clamp(80px, 12vw, 160px); }
+  .modos .eyebrow { color: var(--allioli); }
+  .modos-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+  .modos-head p { color: var(--muted-d); max-width: 36ch; }
+  .modos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: clamp(40px, 5vw, 64px); perspective: 1200px; }
+  .modo { background: var(--fern-2); border: 1px solid var(--line-d); border-radius: 6px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; transition: translate .6s var(--ease), border-color .4s; }
+  .modo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--allioli); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+  .modo:hover { translate: 0 -6px; border-color: rgba(241,210,122,.4); }
+  .modo:hover::after { transform: none; }
+  .modo svg { width: 88px; height: 88px; stroke: var(--allioli); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+  .modo .tag-n { font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; color: var(--muted-d); }
+  .modo h3 { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(34px, 3.2vw, 44px); line-height: .9; }
+  .modo p { color: var(--muted-d); font-size: 16px; }
+  .modo .link { margin-top: auto; align-self: flex-start; }
+  .chair, .bag-handle, .speed { transition: transform .5s var(--ease), opacity .4s; }
+  .modo:hover .chair.l { transform: translateX(-5px); }
+  .modo:hover .chair.r { transform: translateX(5px); }
+  .modo:hover .bag-handle { transform: translateY(-5px); }
+  .wheel { transform-box: fill-box; transform-origin: center; }
+  .modo:hover .wheel { animation: spin .9s linear infinite; }
+  .speed { opacity: 0; transform: translateX(8px); }
+  .modo:hover .speed { opacity: 1; transform: none; }
+  @media (max-width: 900px) { .modos-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Reseñas ---------- */
   .resenas { background: var(--allioli); padding-block: clamp(80px, 12vw, 160px); position: relative; overflow: hidden; }
@@ -241,6 +316,41 @@
   .q-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--fern); background: transparent; display: grid; place-items: center; transition: background .3s, color .3s; }
   .q-btn:hover { background: var(--fern); color: var(--allioli); }
   @media (max-width: 900px) { .res-grid { grid-template-columns: 1fr; } .quotes { min-height: 380px; } }
+
+  /* ---------- Preguntas ---------- */
+  .faq { padding-block: clamp(80px, 12vw, 160px); }
+  .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+  .faq .eyebrow { color: var(--muted); }
+  .faq-side p { color: var(--muted); margin-top: 22px; max-width: 34ch; }
+  .faq-side .btn { margin-top: 28px; }
+  .qa { border-bottom: 1px solid var(--line); }
+  .qa:first-child { border-top: 1px solid var(--line); }
+  .qa button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; background: none; border: 0; text-align: left; font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; }
+  .qa button > span:first-child { transition: transform .5s var(--ease); }
+  .qa button:hover > span:first-child { transform: translateX(6px); }
+  .qa .ico { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--fern); position: relative; flex: none; transition: background .4s, color .4s, transform .6s var(--ease); }
+  .qa .ico::before, .qa .ico::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); transition: transform .5s var(--ease); }
+  .qa .ico::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .qa[data-open] .ico { background: var(--fern); color: var(--allioli); transform: rotate(180deg); }
+  .qa[data-open] .ico::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
+  .qa[data-open] .ans { grid-template-rows: 1fr; }
+  .ans > div { overflow: hidden; }
+  .ans p { padding-bottom: 24px; color: var(--muted); max-width: 58ch; }
+  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Esta noche ---------- */
+  .tonight { background: var(--chili); color: var(--bone); position: relative; overflow: hidden; padding-block: clamp(90px, 12vw, 170px); text-align: center; }
+  .tonight::before { content: ""; position: absolute; left: 50%; top: 50%; width: min(90vw, 900px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(241,210,122,.4), rgba(232,137,58,.18) 55%, transparent); animation: pulse 5s ease-in-out infinite; pointer-events: none; }
+  @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .9; } 50% { transform: translate(-50%, -50%) scale(1.08); opacity: .6; } }
+  .bg-word { position: absolute; top: 50%; left: 0; transform: translateY(-50%); white-space: nowrap; font-family: var(--f-display); font-weight: 900; text-transform: uppercase; font-size: 24vw; line-height: .8; color: transparent; -webkit-text-stroke: 1.5px rgba(236,237,230,.16); pointer-events: none; user-select: none; }
+  .tonight .wrap { position: relative; }
+  .tonight .eyebrow { color: var(--allioli); }
+  .tonight h2 { font-size: clamp(56px, 10vw, 150px); margin-top: 18px; }
+  .tonight .st { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; margin-top: 24px; font-variant-numeric: tabular-nums; }
+  .tonight .ctas { justify-content: center; margin-top: 34px; }
+  .tonight .btn:not(.btn-solid) { color: var(--bone); }
+  .tonight .btn:not(.btn-solid):hover { color: var(--fern); }
 
   /* ---------- Visítanos ---------- */
   .visita { background: var(--fern); color: var(--bone); padding-block: clamp(80px, 12vw, 160px); }
@@ -341,9 +451,13 @@
   </div>
 
   <section class="manifesto" aria-label="La idea">
+    <div class="ghost" aria-hidden="true">Gallioli · Gallioli</div>
+    <svg class="m-leaf" viewBox="0 0 200 220" aria-hidden="true"><path d="M190 8C118 18 52 64 30 170c44-10 76-34 98-68-12 34-32 58-56 80 66-12 112-80 118-174z" fill="#3F7D56"/><path d="M186 14C140 62 96 116 34 166" fill="none" stroke="#0F2A1E" stroke-width="2" opacity=".35"/></svg>
+    <svg class="m-leaf b" viewBox="0 0 200 220" aria-hidden="true"><g transform="translate(200 0) scale(-1 1)"><path d="M190 8C118 18 52 64 30 170c44-10 76-34 98-68-12 34-32 58-56 80 66-12 112-80 118-174z" fill="#2B5E40"/></g></svg>
     <div class="wrap">
       <p class="eyebrow">La idea</p>
-      <p class="big" id="manifesto">Aquí el pollo se hace <em>al carbón</em>, las croquetas salen de la cocina sin parar y el allioli se hace en casa. Producto de proximidad, mesas para compartir y plantas por todas partes.</p>
+      <p class="big" id="manifesto">Aquí el pollo se hace <em>al carbón</em> <span class="pic pic-ember" aria-hidden="true"><svg viewBox="0 0 76 36"><circle cx="22" cy="20" r="6" fill="#E8893A"/><circle cx="38" cy="15" r="4" fill="#F1D27A"/><circle cx="54" cy="21" r="5" fill="#C9432B"/></svg></span>, las croquetas <span class="pic pic-croq" aria-hidden="true"><svg viewBox="0 0 76 36"><ellipse cx="22" cy="19" rx="12" ry="8" fill="#B8732F"/><ellipse cx="40" cy="17" rx="12" ry="8" fill="#A8641C"/><ellipse cx="57" cy="20" rx="11" ry="7.5" fill="#B8732F"/></svg></span> salen de la cocina sin parar y el <mark>allioli</mark> <span class="pic pic-oli" aria-hidden="true"><svg viewBox="0 0 76 36"><path d="M10 12 C 22 4, 30 22, 40 12 S 58 6, 66 14" fill="none" stroke="#E4C766" stroke-width="7" stroke-linecap="round"/><path d="M40 13 v8 a3 3 0 0 0 6 0 v-6" fill="#E4C766"/></svg></span> manda en la mesa. Producto de proximidad, platos para compartir y <mark>plantas por todas partes</mark> <span class="pic pic-leaf" aria-hidden="true"><svg viewBox="0 0 76 36"><path d="M18 28 C 22 12, 40 6, 60 8 C 56 24, 40 30, 18 28z" fill="#9CC49A"/><path d="M18 28 C 32 20, 44 14, 58 9" fill="none" stroke="#1F4A33" stroke-width="1.5"/></svg></span>.</p>
+      <p class="sign">Gallioli Bistrot · Sant Gervasi</p>
     </div>
   </section>
 
@@ -434,6 +548,56 @@
     </div>
   </section>
 
+  <section class="aioli" id="allioli" aria-label="De dónde viene el nombre">
+    <div class="wrap aioli-in">
+      <p class="eyebrow">De dónde viene el nombre</p>
+      <div class="equation" aria-label="Gall más allioli: Gallioli">
+        <span class="eq-w1" aria-hidden="true"><span class="l">G</span><span class="l">A</span><span class="l">L</span><span class="l">L</span></span><span class="eq-plus" aria-hidden="true">+</span><span class="eq-w2" aria-hidden="true"><span class="l dup">A</span><span class="l dup">L</span><span class="l dup">L</span><span class="l">I</span><span class="l">O</span><span class="l">L</span><span class="l">I</span></span>
+      </div>
+      <div class="aioli-grid">
+        <svg class="mortar" viewBox="0 0 400 380" aria-hidden="true">
+          <defs><clipPath id="mouth"><ellipse cx="200" cy="170" rx="140" ry="30"/></clipPath></defs>
+          <ellipse cx="200" cy="350" rx="150" ry="16" fill="rgba(15,42,30,.16)"/>
+          <path d="M150 326 h100 l12 22 h-124z" fill="#1F4A33"/>
+          <path d="M44 168 C 44 300, 112 336, 200 336 C 288 336, 356 300, 356 168 Z" fill="#2E6346"/>
+          <path d="M70 200 C 90 280, 150 306, 200 308" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10" stroke-linecap="round"/>
+          <ellipse cx="200" cy="168" rx="156" ry="38" fill="#3F7D56"/>
+          <ellipse cx="200" cy="170" rx="140" ry="30" fill="#D9C98C"/>
+          <g clip-path="url(#mouth)">
+            <ellipse cx="200" cy="162" rx="140" ry="18" fill="rgba(15,42,30,.14)"/>
+            <ellipse id="cream" cx="200" cy="176" rx="134" ry="26" fill="#F6ECC4"/>
+            <g id="chunks" fill="#E3D3A0"><circle cx="170" cy="176" r="5"/><circle cx="196" cy="182" r="4"/><circle cx="222" cy="174" r="5"/><circle cx="238" cy="184" r="3.5"/><circle cx="182" cy="188" r="3"/></g>
+            <ellipse id="gloss" cx="176" cy="168" rx="40" ry="6" fill="rgba(255,255,255,.7)"/>
+          </g>
+          <g id="cloves" fill="#FBF6E6" stroke="#0F2A1E" stroke-width="2.5" stroke-linejoin="round">
+            <path d="M160 180 c-14 -2 -18 -18 -6 -30 c4 -4 6 -10 6 -14 c4 6 14 10 16 22 c2 12 -6 22 -16 22z"/>
+            <path d="M204 176 c-14 -2 -18 -18 -6 -30 c4 -4 6 -10 6 -14 c4 6 14 10 16 22 c2 12 -6 22 -16 22z"/>
+            <path d="M240 182 c-14 -2 -18 -18 -6 -30 c4 -4 6 -10 6 -14 c4 6 14 10 16 22 c2 12 -6 22 -16 22z"/>
+          </g>
+          <g id="drops" fill="#D9A93A">
+            <path d="M186 150 c0 -8 6 -14 6 -18 c0 4 6 10 6 18 a6 6 0 0 1 -12 0z"/>
+            <path d="M206 158 c0 -8 6 -14 6 -18 c0 4 6 10 6 18 a6 6 0 0 1 -12 0z"/>
+            <path d="M224 150 c0 -8 6 -14 6 -18 c0 4 6 10 6 18 a6 6 0 0 1 -12 0z"/>
+          </g>
+          <g transform="translate(236 176) rotate(28)"><g id="pestle">
+            <rect x="-17" y="-196" width="34" height="196" rx="17" fill="#C79A5B"/>
+            <rect x="-17" y="-196" width="34" height="60" rx="17" fill="#A77A3E"/>
+            <path d="M-8 -120 v100" stroke="rgba(255,255,255,.25)" stroke-width="5" stroke-linecap="round"/>
+          </g></g>
+        </svg>
+        <div>
+          <ol class="steps">
+            <li class="step"><span class="num">01 / 04</span><h3>Ajo</h3><p>Todo empieza con unos dientes de ajo y una pizca de sal, en el mortero.</p></li>
+            <li class="step"><span class="num">02 / 04</span><h3>Aceite</h3><p>Después, aceite de oliva, gota a gota. Sin prisa: si corres, la salsa se corta.</p></li>
+            <li class="step"><span class="num">03 / 04</span><h3>Paciencia</h3><p>La mano de mortero gira siempre en el mismo sentido, hasta que la salsa liga, blanca y espesa.</p></li>
+            <li class="step"><span class="num">04 / 04</span><h3>Gall + allioli</h3><p>Gall es gallo en catalán. Súmale allioli y tienes el nombre de la casa.</p></li>
+          </ol>
+          <div class="seq-bar" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="carta" id="carta">
     <div class="wrap">
       <div class="carta-head">
@@ -463,6 +627,41 @@
           <div class="item"><span class="n">Canelón</span><span class="lead-dots"></span><span class="p">— €</span></div>
           <div class="item"><span class="n">Pastel de queso</span><span class="lead-dots"></span><span class="p">— €</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modos" id="modos">
+    <div class="wrap">
+      <div class="modos-head">
+        <div>
+          <p class="eyebrow">Como prefieras</p>
+          <h2 class="display h2 js-lines" style="margin-top:16px"><span class="line-mask"><span>Aquí, para llevar</span></span><span class="line-mask"><span>o en tu casa</span></span></h2>
+        </div>
+        <p class="js-up">Siéntate en el comedor, pasa a recoger tu pedido o recíbelo en casa.</p>
+      </div>
+      <div class="modos-grid">
+        <article class="modo">
+          <svg viewBox="0 0 88 88" aria-hidden="true"><path class="draw" d="M20 42 H68"/><path class="draw" d="M32 42 V70 M56 42 V70"/><path class="draw" d="M36 42 a8 7 0 0 1 16 0"/><path class="draw" d="M44 30 v5"/><g class="chair l"><path class="draw" d="M10 26 V70 M10 52 H22 V70"/></g><g class="chair r"><path class="draw" d="M78 26 V70 M78 52 H66 V70"/></g></svg>
+          <span class="tag-n">En el local</span>
+          <h3>Mesa entre plantas</h3>
+          <p>Un comedor acogedor para una cena en pareja o una mesa larga con amigos.</p>
+          <a class="link js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa →</a>
+        </article>
+        <article class="modo">
+          <svg viewBox="0 0 88 88" aria-hidden="true"><path class="draw" d="M20 32 H68 L63 74 H25 Z"/><g class="bag-handle"><path class="draw" d="M34 32 V26 a10 10 0 0 1 20 0 V32"/></g><path class="draw" d="M36 52 H52"/><path class="draw" d="M38 60 H50"/></svg>
+          <span class="tag-n">Recogida sin entrar</span>
+          <h3>Encarga y recoge</h3>
+          <p>Llama, haz tu pedido y pasa a buscarlo. Una clienta lo tuvo listo en 15 minutos.</p>
+          <button class="link js-copy-phone">Copiar teléfono →</button>
+        </article>
+        <article class="modo">
+          <svg viewBox="0 0 88 88" aria-hidden="true"><path class="speed" d="M2 40 H12 M0 50 H9"/><path class="draw" d="M14 32 h24 v20 h-24 z"/><path class="draw" d="M24 64 H50 L58 40 H66"/><path class="draw" d="M58 40 L54 26 H46"/><path class="draw" d="M32 52 H48"/><g class="wheel"><circle class="draw" cx="24" cy="64" r="9"/><path d="M24 57 V71 M17 64 H31"/></g><g class="wheel"><circle class="draw" cx="68" cy="64" r="9"/><path d="M68 57 V71 M61 64 H75"/></g></svg>
+          <span class="tag-n">A domicilio</span>
+          <h3>La cena, en casa</h3>
+          <p>Pollo al carbón, croquetas y boniato, directos a tu sofá.</p>
+          <a class="link js-pedir" href="#" target="_blank" rel="noopener">Pedir online →</a>
+        </article>
       </div>
     </div>
   </section>
@@ -498,6 +697,38 @@
           <button class="q-btn" id="q-prev" aria-label="Reseña anterior">←</button>
           <button class="q-btn" id="q-next" aria-label="Reseña siguiente">→</button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap faq-grid">
+      <div class="faq-side">
+        <p class="eyebrow">Antes de venir</p>
+        <h2 class="display h2 js-lines" style="margin-top:16px"><span class="line-mask"><span>Lo que</span></span><span class="line-mask"><span>nos preguntan</span></span></h2>
+        <p class="js-up">Si tienes otra duda, llámanos al <span style="white-space:nowrap">932 22 77 38</span> o escríbenos por Instagram.</p>
+        <button class="btn btn-dark js-copy-phone js-up">Copiar teléfono <span class="arr">→</span></button>
+      </div>
+      <div class="qas">
+        <div class="qa" data-open><button aria-expanded="true"><span>¿Hace falta reservar?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Te lo recomendamos, sobre todo el fin de semana. Puedes reservar online o por teléfono.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false"><span>¿Puedo encargar para llevar?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Sí. Llama, haz tu pedido y pasa a recogerlo sin entrar. El pollo al carbón con patatas y las croquetas son de lo más pedido para llevar.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false"><span>¿Hacéis entrega a domicilio?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Sí, también puedes pedir a domicilio desde el botón de pedido online.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false"><span>¿Cuánto cuesta cenar?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Entre 10 y 20 € por persona, según los propios clientes en Google.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false"><span>¿Tenéis platos picantes?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Sí: si te va el picante, pide las alitas. Las bravas también llevan su punto.</p></div></div></div>
+        <div class="qa"><button aria-expanded="false"><span>¿Es un sitio LGBTQ+ friendly?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Sí. Aquí todo el mundo es bienvenido.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tonight" aria-label="Reserva">
+    <div class="bg-word" aria-hidden="true">Reserva · Reserva · Reserva</div>
+    <div class="wrap">
+      <p class="eyebrow">Gallioli · Sant Gervasi</p>
+      <h2 class="display js-lines"><span class="line-mask"><span id="tonight-h">¿Cenamos esta noche?</span></span></h2>
+      <p class="st" id="tonight-st"></p>
+      <div class="ctas">
+        <a class="btn btn-solid js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
+        <button class="btn js-copy-phone">932 22 77 38</button>
       </div>
     </div>
   </section>
@@ -548,19 +779,27 @@
   const LINKS = {
     reserva: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona", // TODO: enlace directo de last.app
     maps: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona",
-    instagram: "https://www.instagram.com/galliolibistrot/"
+    instagram: "https://www.instagram.com/galliolibistrot/",
+    pedir: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" // TODO: enlace de pedido online
   };
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   $$(".js-reserva").forEach(a => a.href = LINKS.reserva);
+  $$(".js-pedir").forEach(a => a.href = LINKS.pedir);
   $("#maps").href = LINKS.maps; $("#ig").href = LINKS.instagram;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const toastEl = $("#toast"); let tt;
   const toast = m => { toastEl.textContent = m; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove("show"), 2200); };
-  $("#copy-phone").addEventListener("click", async () => {
-    try { await navigator.clipboard.writeText("932 22 77 38"); toast("Número copiado"); }
-    catch (e) { const r = document.createRange(); r.selectNodeContents($("#phone")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Número seleccionado"); }
-  });
+  $$("#copy-phone, .js-copy-phone").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText("932 22 77 38"); toast("Número copiado: 932 22 77 38"); }
+    catch (e) { toast("Llámanos al 932 22 77 38"); }
+  }));
+
+  /* ===== Preguntas ===== */
+  $$(".qa button").forEach(b => b.addEventListener("click", () => {
+    const qa = b.closest(".qa"), open = !qa.hasAttribute("data-open");
+    qa.toggleAttribute("data-open", open); b.setAttribute("aria-expanded", open);
+  }));
 
   /* ===== Horario en hora de Barcelona ===== */
   const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
@@ -594,6 +833,10 @@
     const t = Math.max(0, s.left), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), sc = t % 60;
     $("#now-count").textContent = (h ? h + " h " : "") + String(m).padStart(2, "0") + " min " + String(sc).padStart(2, "0") + " s " + s.label;
     week.querySelectorAll("li").forEach(li => li.classList.toggle("today", +li.dataset.day === s.day));
+    const n = now(), dinner = HOURS[n.day].some(([a, b]) => a >= 1200 && n.min < b);
+    const th = dinner ? "¿Cenamos esta noche?" : "¿Cenamos pronto?";
+    if ($("#tonight-h").textContent !== th) $("#tonight-h").textContent = th;
+    $("#tonight-st").textContent = s.text + " · " + $("#now-count").textContent;
   }
   tick(); setInterval(tick, 1000);
 
@@ -651,7 +894,7 @@
           const frag = document.createDocumentFragment();
           n.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) frag.appendChild(document.createTextNode(t)); else { const s = document.createElement("span"); s.className = cls; s.textContent = t; frag.appendChild(s); } });
           n.replaceWith(frag);
-        } else if (n.nodeType === 1) walk(n);
+        } else if (n.nodeType === 1 && !n.classList.contains("pic")) walk(n);
       });
     };
     walk(el); return el.querySelectorAll("." + cls);
@@ -716,8 +959,18 @@
   } });
 
   /* ===== Manifiesto: se enciende palabra a palabra ===== */
-  const mw = splitWords($("#manifesto"));
-  gsap.fromTo(mw, { opacity: .16 }, { opacity: 1, stagger: .1, ease: "none", scrollTrigger: { trigger: "#manifesto", start: "top 80%", end: "bottom 45%", scrub: .6 } });
+  splitWords($("#manifesto"));
+  const tokens = [...$("#manifesto").querySelectorAll(".w, .pic")];
+  gsap.set(".manifesto mark", { backgroundSize: "0% 40%" });
+  const mt = gsap.timeline({ scrollTrigger: { trigger: "#manifesto", start: "top 80%", end: "bottom 42%", scrub: .6 } });
+  tokens.forEach((t, i) => {
+    if (t.classList.contains("pic")) mt.fromTo(t, { scale: 0, rotate: -25 }, { scale: 1, rotate: 0, duration: .35, ease: "back.out(2.2)" }, i * .1);
+    else mt.fromTo(t, { opacity: .15 }, { opacity: 1, duration: .1, ease: "none" }, i * .1);
+  });
+  $$(".manifesto mark").forEach(mk => { const ws = mk.querySelectorAll(".w"); mt.to(mk, { backgroundSize: "100% 40%", duration: ws.length * .1 + .15, ease: "none" }, tokens.indexOf(ws[0]) * .1); });
+  gsap.fromTo(".manifesto .ghost", { xPercent: 0 }, { xPercent: -28, ease: "none", scrollTrigger: { trigger: ".manifesto", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo(".m-leaf", { yPercent: 20, rotate: -6 }, { yPercent: -25, rotate: 8, ease: "none", scrollTrigger: { trigger: ".manifesto", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.from(".sign", { opacity: 0, x: -30, duration: 1, ease: "expo.out", scrollTrigger: { trigger: ".sign", start: "top 92%" } });
 
   /* ===== Titulares por líneas y bloques que suben ===== */
   $$(".js-lines").forEach(h => gsap.from(h.querySelectorAll(".line-mask > span"), { yPercent: 110, duration: 1.1, stagger: .1, ease: "expo.out", scrollTrigger: { trigger: h, start: "top 85%" } }));
@@ -757,8 +1010,54 @@
   });
   mm.add("(max-width: 900px)", () => plateAnims(null));
 
+  /* ===== Gall + allioli: el mortero, fijado mientras se hace scroll ===== */
+  mm.add("(min-height: 600px)", () => {
+    const sec = $("#allioli"); sec.classList.add("js-seq");
+    const steps = $$("#allioli .step"), bars = $$("#allioli .seq-bar b"), drops = $$("#drops path");
+    gsap.set(steps, { autoAlpha: 0 }); gsap.set(steps[0], { autoAlpha: 1 });
+    gsap.set("#cloves path", { y: -260, opacity: 0 });
+    gsap.set(drops, { y: -220, opacity: 0 });
+    gsap.set("#pestle", { y: -300, opacity: 0 });
+    gsap.set("#cream", { scale: .12, transformOrigin: "50% 50%", fill: "#E9DDB4" });
+    gsap.set("#chunks", { opacity: 0 }); gsap.set("#gloss", { opacity: 0, x: -30 });
+    const tl = gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: { trigger: sec, start: "top top", end: "+=320%", pin: true, scrub: .8, anticipatePin: 1 } });
+    const swap = (a, b, at) => tl.to(steps[a], { autoAlpha: 0, y: -24, duration: .12 }, at).fromTo(steps[b], { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .14 }, at + .1);
+    bars.forEach((b, i) => tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 1 }, i));
+    // 1 · ajo
+    tl.to("#cloves path", { y: 0, opacity: 1, duration: .5, stagger: .12, ease: "bounce.out" }, .05);
+    // 2 · aceite
+    swap(0, 1, .95);
+    [0, 1].forEach(k => drops.forEach((d, i) => tl.fromTo(d, { y: -220, opacity: 1 }, { y: 20, duration: .2, ease: "power2.in" }, 1.1 + k * .35 + i * .06).to(d, { opacity: 0, duration: .03 })));
+    tl.to("#cream", { scale: .6, duration: .8 }, 1.15).to("#chunks", { opacity: 1, duration: .3 }, 1.3);
+    // 3 · mortero
+    swap(1, 2, 1.95);
+    tl.to("#pestle", { y: 0, opacity: 1, duration: .2, ease: "power2.out" }, 2.05)
+      .to("#pestle", { keyframes: [{ x: -26, y: 5 }, { x: 22, y: -2 }, { x: -20, y: 4 }, { x: 20, y: 0 }, { x: -12, y: 3 }, { x: 0, y: 0 }], duration: .65, ease: "sine.inOut" }, 2.25)
+      .to("#cloves path", { scaleY: .15, opacity: 0, transformOrigin: "50% 100%", duration: .35, stagger: .05 }, 2.3)
+      .to("#chunks", { opacity: 0, duration: .3 }, 2.6)
+      .to("#cream", { scale: 1, fill: "#F6ECC4", duration: .6 }, 2.3)
+      .to("#gloss", { opacity: 1, x: 10, duration: .3 }, 2.7);
+    // 4 · gall + allioli
+    swap(2, 3, 2.95);
+    tl.to("#pestle", { y: -420, opacity: 0, duration: .25, ease: "power2.in" }, 3.02)
+      .to("#allioli .eq-plus", { width: 0, opacity: 0, paddingLeft: 0, paddingRight: 0, duration: .25, ease: "power2.inOut" }, 3.1)
+      .to("#allioli .dup", { width: 0, opacity: 0, duration: .3, stagger: .05, ease: "power2.inOut" }, 3.2)
+      .to("#allioli .eq-w2", { color: "#0F2A1E", duration: .25 }, 3.45)
+      .to({}, { duration: .2 }, 3.8);
+    return () => sec.classList.remove("js-seq");
+  });
+
+  /* ===== Tres maneras ===== */
+  gsap.from(".modo", { y: 70, rotateX: -16, opacity: 0, duration: 1.2, stagger: .12, ease: "expo.out", transformOrigin: "50% 100%", scrollTrigger: { trigger: ".modos-grid", start: "top 85%" } });
+  $$(".modo .draw").forEach(p => { const l = p.getTotalLength ? p.getTotalLength() : 200; gsap.fromTo(p, { strokeDasharray: l, strokeDashoffset: l }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.inOut", delay: .3, scrollTrigger: { trigger: ".modos-grid", start: "top 85%" } }); });
+
+  /* ===== Preguntas y banda final ===== */
+  gsap.from(".qa", { y: 30, opacity: 0, duration: .9, stagger: .07, ease: "expo.out", scrollTrigger: { trigger: ".qas", start: "top 85%" } });
+  gsap.fromTo(".bg-word", { xPercent: 0 }, { xPercent: -30, ease: "none", scrollTrigger: { trigger: ".tonight", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.from(".tonight .st, .tonight .ctas", { y: 24, opacity: 0, duration: 1, stagger: .12, ease: "expo.out", scrollTrigger: { trigger: ".tonight", start: "top 75%" } });
+
   // sección verde que se abre de marco a pantalla completa
-  $$(".stars, .visita").forEach(sec => gsap.fromTo(sec, { clipPath: "inset(4% 3% 0% 3% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px)", ease: "none", scrollTrigger: { trigger: sec, start: "top bottom", end: "top 20%", scrub: true } }));
+  $$(".stars, .modos, .visita").forEach(sec => gsap.fromTo(sec, { clipPath: "inset(4% 3% 0% 3% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 0px)", ease: "none", scrollTrigger: { trigger: sec, start: "top bottom", end: "top 20%", scrub: true } }));
 
   /* ===== Carta: filas y puntos guía ===== */
   $$(".cat").forEach(cat => {
