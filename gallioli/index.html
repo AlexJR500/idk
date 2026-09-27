@@ -1198,6 +1198,8 @@
     .from(".js-hero-fade", { y: 26, opacity: 0, duration: 1, stagger: .12 }, "-=1.1")
     .from(".badge", { scale: 0, rotate: -120, duration: 1.2, ease: "back.out(1.6)" }, "-=1")
     .add(() => curtain.remove());
+  // si el navegador pausa las animaciones (pestaña en segundo plano, vista previa), el telón no se queda puesto
+  setTimeout(() => { if (intro.progress() < 1) intro.progress(1); }, 6000);
 
   // cabecera: se oculta al bajar y vuelve al subir
   ScrollTrigger.create({ start: 120, end: "max", onUpdate: s => $("#top").classList.toggle("hide", s.direction === 1 && s.scroll() > 300) });
