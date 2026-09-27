@@ -1,5 +1,59 @@
-<title>Gallioli Bistrot</title>
-<meta name="description" content="Gallioli Bistrot · Pollo a la brasa, croquetas y allioli de la casa en Sant Gervasi, Barcelona.">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<title>Gallioli Bistrot | Pollo a la brasa y croquetas en Sant Gervasi, Barcelona</title>
+<meta name="description" content="Bistrot en Sant Gervasi, Barcelona: pollo al carbón, Gallitos Fried Chicken, croquetas y allioli. 4,8 ★ en Google. Reserva mesa, recoge o pide a domicilio.">
+<link rel="canonical" href="https://www.tudominio.com/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2A1E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gallioli Bistrot">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Gallioli Bistrot · Pollo a la brasa, croquetas y allioli">
+<meta property="og:description" content="Bistrot de barrio en Sant Gervasi, Barcelona. Pollo al carbón, croquetas y el allioli de la casa. Reserva mesa, recoge o pide a domicilio.">
+<meta property="og:url" content="https://www.tudominio.com/">
+<meta property="og:image" content="https://www.tudominio.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gallioli Bistrot, pollo a la brasa y croquetas en Sant Gervasi, Barcelona">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gallioli Bistrot · Pollo a la brasa, croquetas y allioli">
+<meta name="twitter:description" content="Bistrot de barrio en Sant Gervasi, Barcelona. Reserva mesa, recoge o pide a domicilio.">
+<meta name="twitter:image" content="https://www.tudominio.com/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Gallioli Bistrot",
+  "url": "https://www.tudominio.com/",
+  "image": "https://www.tudominio.com/og-image.jpg",
+  "telephone": "+34 932 22 77 38",
+  "priceRange": "10-20 €",
+  "servesCuisine": ["Pollo a la brasa", "Tapas", "Mediterránea"],
+  "acceptsReservations": true,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Ronda del General Mitre, 220",
+    "addressLocality": "Barcelona",
+    "postalCode": "08006",
+    "addressRegion": "Barcelona",
+    "addressCountry": "ES"
+  },
+  "sameAs": ["https://www.instagram.com/galliolibistrot/"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Sunday"], "opens": "12:30", "closes": "16:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"], "opens": "12:30", "closes": "16:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"], "opens": "20:00", "closes": "23:00" }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap">
@@ -29,6 +83,7 @@
     --ease: cubic-bezier(.2, .7, .1, 1);
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0; background: var(--bone); color: var(--ink);
     font: 400 17px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden;
@@ -322,7 +377,7 @@
   .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
   .faq .eyebrow { color: var(--muted); }
   .faq-side p { color: var(--muted); margin-top: 22px; max-width: 34ch; }
-  .faq-side .btn { margin-top: 28px; }
+  .faq-side .link { display: inline-block; }
   .qa { border-bottom: 1px solid var(--line); }
   .qa:first-child { border-top: 1px solid var(--line); }
   .qa button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; background: none; border: 0; text-align: left; font-size: clamp(18px, 1.8vw, 22px); font-weight: 600; }
@@ -379,7 +434,7 @@
   @media (max-width: 860px) { .v-grid { grid-template-columns: 1fr; } }
 
   footer.site { background: var(--fern); color: var(--bone); border-top: 1px solid var(--line-d); overflow: hidden; padding-bottom: env(safe-area-inset-bottom, 0px); }
-  .foot-big { font-size: clamp(80px, 21vw, 330px); font-weight: 900; line-height: .78; white-space: nowrap; text-align: center; padding-top: 48px; margin-bottom: -.06em; }
+  .foot-big { font-size: clamp(80px, 21vw, 330px); font-weight: 900; line-height: .8; white-space: nowrap; text-align: center; padding-top: 48px; padding-bottom: .06em; overflow: hidden; }
   .foot-big .ch { display: inline-block; }
   .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-block: 22px; font-size: 13px; color: var(--muted-d); border-top: 1px solid var(--line-d); }
   .foot-row a { color: var(--bone); }
@@ -391,11 +446,79 @@
   .curtain { position: fixed; inset: 0; z-index: 100; background: var(--fern); display: grid; place-items: center; pointer-events: none; }
   .curtain b { font-family: var(--f-display); font-weight: 900; font-size: clamp(90px, 14vw, 180px); color: var(--allioli); line-height: 1; }
 
+  /* ---------- Accesibilidad y móvil ---------- */
+  .skip { position: absolute; left: 16px; top: -60px; z-index: 200; background: var(--allioli); color: var(--fern); padding: 10px 16px; border-radius: 999px; font-weight: 600; text-decoration: none; transition: top .3s var(--ease); }
+  .skip:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
+  .menu-btn { display: none; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line-d); background: transparent; position: relative; flex: none; }
+  .menu-btn span { position: absolute; left: 13px; right: 13px; height: 1.5px; background: var(--bone); transition: transform .5s var(--ease), top .5s var(--ease); }
+  .menu-btn span:first-child { top: 18px; } .menu-btn span:last-child { top: 26px; }
+  .menu-btn[aria-expanded="true"] span:first-child { top: 22px; transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:last-child { top: 22px; transform: rotate(-45deg); }
+  .mnav { position: fixed; inset: 0; z-index: 55; background: var(--fern); color: var(--bone); display: flex; flex-direction: column; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 96px) var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 32px); clip-path: circle(0% at calc(100% - 40px) 40px); transition: clip-path .7s var(--ease); overflow-y: auto; }
+  .mnav.open { clip-path: circle(150% at calc(100% - 40px) 40px); }
+  .mnav nav { display: grid; gap: 4px; }
+  .mnav nav a { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: clamp(40px, 11vw, 64px); line-height: 1.02; text-decoration: none; opacity: 0; transform: translateY(24px); transition: opacity .5s var(--ease), transform .6s var(--ease), color .3s; }
+  .mnav.open nav a { opacity: 1; transform: none; }
+  .mnav nav a:hover { color: var(--allioli); }
+  .mnav.open nav a:nth-child(2) { transition-delay: .05s; } .mnav.open nav a:nth-child(3) { transition-delay: .1s; } .mnav.open nav a:nth-child(4) { transition-delay: .15s; } .mnav.open nav a:nth-child(5) { transition-delay: .2s; } .mnav.open nav a:nth-child(6) { transition-delay: .25s; }
+  .mnav-foot { display: grid; gap: 14px; justify-items: start; margin-top: 32px; }
+  .mnav-foot p { color: var(--muted-d); font-size: 14px; }
+  body.menu-open { overflow: hidden; }
+  .mcta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 58; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 12px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 12px); background: color-mix(in srgb, var(--fern) 94%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line-d); color: var(--bone); transform: translateY(110%); transition: transform .6s var(--ease); }
+  .mcta.show { transform: none; }
+  .mcta .pill { display: inline-flex; margin: 0; font-size: 12px; white-space: normal; }
+  .mcta .btn { padding: 13px 22px; white-space: nowrap; flex: none; }
+  body.cc-open .mcta, body.menu-open .mcta { transform: translateY(110%); }
+  @media (max-width: 960px) { .menu-btn { display: block; } .top-in { gap: 12px; } .top .btn { margin-left: auto; } .pill { margin-left: auto; } .top .pill + .btn { margin-left: 0; } }
+  @media (max-width: 760px) { .hdr-cta { display: none !important; } .top .menu-btn { margin-left: auto; } .mcta { display: flex; } footer.site { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 76px); } .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 90px); } }
+  @media (max-width: 560px) { .top .pill { display: none; } }
+
+  /* ---------- Formulario de grupos ---------- */
+  .grupos { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(32px, 5vw, 80px); margin-top: clamp(64px, 8vw, 110px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line-d); }
+  .grupos .eyebrow { color: var(--allioli); }
+  .grupos h3 { font-size: clamp(40px, 5vw, 64px); margin-top: 14px; }
+  .grupos-head > p:not(.eyebrow) { color: var(--muted-d); margin-top: 16px; max-width: 36ch; }
+  .form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+  .field { display: grid; gap: 6px; align-content: start; }
+  .field.full, .form .full { grid-column: 1 / -1; }
+  .field label { font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+  .field .opt { color: var(--muted-d); font-weight: 400; }
+  .field input, .field textarea { width: 100%; font: 16px/1.4 var(--f-body); color: var(--bone); background: var(--fern-2); border: 1px solid var(--line-d); border-radius: 6px; padding: 13px 14px; transition: border-color .3s, box-shadow .3s; }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--allioli); box-shadow: 0 0 0 3px rgba(241,210,122,.2); }
+  .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #F08A74; }
+  .field input::-webkit-calendar-picker-indicator { filter: invert(1) opacity(.7); }
+  .err { color: #F5A08D; font-size: 13px; min-height: 0; }
+  .err:empty { display: none; }
+  .count { font-family: var(--f-mono); font-size: 11px; color: var(--muted-d); justify-self: end; }
+  .check { grid-template-columns: auto 1fr; align-items: start; gap: 12px; }
+  .check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--allioli); }
+  .check label { font-weight: 400; font-size: 14px; color: var(--muted-d); }
+  .check label a { color: var(--allioli); }
+  .check .err { grid-column: 1 / -1; }
+  .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+  .form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .form-status { font-size: 15px; }
+  .form-status.ok { color: #7FD69B; } .form-status.bad { color: #F5A08D; }
+  .form-legal { font-size: 12px; color: var(--muted-d); line-height: 1.5; }
+  .form-legal a { color: var(--bone); }
+  @media (max-width: 900px) { .grupos { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .form { grid-template-columns: 1fr; } }
+
+  .link.dark { color: var(--fern); }
+  .foot-legal { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .foot-legal a, .foot-legal button { color: var(--muted-d); background: none; border: 0; padding: 0; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+  .foot-legal a:hover, .foot-legal button:hover { color: var(--bone); }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
+<link rel="stylesheet" href="assets/consent.css">
 
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 <header class="top" id="top">
   <div class="wrap top-in">
     <a class="logo" href="#inicio" aria-label="Gallioli Bistrot, inicio"><span class="g">G</span>allioli</a>
@@ -407,11 +530,29 @@
       <a href="#visita">Visítanos</a>
     </nav>
     <span class="pill" id="pill"><span class="dot"></span><span id="pill-text">Horario</span></span>
-    <a class="btn btn-solid js-reserva" href="#" target="_blank" rel="noopener">Reservar</a>
+    <a class="btn btn-solid js-reserva hdr-cta" data-loc="cabecera" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Abrir menú"><span></span><span></span></button>
   </div>
 </header>
 
+<div class="mnav" id="mnav" hidden>
+  <nav aria-label="Menú móvil">
+    <a href="#casa">La casa</a>
+    <a href="#estrella">Platos</a>
+    <a href="#carta">Carta</a>
+    <a href="#resenas">Reseñas</a>
+    <a href="#faq">Preguntas</a>
+    <a href="#visita">Visítanos</a>
+  </nav>
+  <div class="mnav-foot">
+    <a class="btn btn-solid js-reserva" data-loc="menu" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
+    <p>932 22 77 38 · Ronda del General Mitre, 220</p>
+  </div>
+</div>
+
+
 <main id="inicio">
+  <span id="contenido"></span>
   <section class="hero" aria-label="Presentación">
     <canvas id="embers" aria-hidden="true"></canvas>
     <div class="glow" aria-hidden="true"></div>
@@ -430,7 +571,7 @@
         <div class="hero-side js-hero-fade">
           <p>Un bistrot de barrio lleno de plantas en la Ronda del General Mitre. Para cenar en pareja, con amigos, o para llevarte la cena a casa.</p>
           <div class="ctas">
-            <a class="btn btn-solid js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
+            <a class="btn btn-solid js-reserva" data-loc="portada" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
             <a class="btn" href="#carta">Ver la carta</a>
           </div>
         </div>
@@ -646,7 +787,7 @@
           <span class="tag-n">En el local</span>
           <h3>Mesa entre plantas</h3>
           <p>Un comedor acogedor para una cena en pareja o una mesa larga con amigos.</p>
-          <a class="link js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa →</a>
+          <a class="link js-reserva" data-loc="en-el-local" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa →</a>
         </article>
         <article class="modo">
           <svg viewBox="0 0 88 88" aria-hidden="true"><path class="draw" d="M20 32 H68 L63 74 H25 Z"/><g class="bag-handle"><path class="draw" d="M34 32 V26 a10 10 0 0 1 20 0 V32"/></g><path class="draw" d="M36 52 H52"/><path class="draw" d="M38 60 H50"/></svg>
@@ -660,7 +801,7 @@
           <span class="tag-n">A domicilio</span>
           <h3>La cena, en casa</h3>
           <p>Pollo al carbón, croquetas y boniato, directos a tu sofá.</p>
-          <a class="link js-pedir" href="#" target="_blank" rel="noopener">Pedir online →</a>
+          <a class="link js-pedir" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Pedir online →</a>
         </article>
       </div>
     </div>
@@ -707,7 +848,7 @@
         <p class="eyebrow">Antes de venir</p>
         <h2 class="display h2 js-lines" style="margin-top:16px"><span class="line-mask"><span>Lo que</span></span><span class="line-mask"><span>nos preguntan</span></span></h2>
         <p class="js-up">Si tienes otra duda, llámanos al <span style="white-space:nowrap">932 22 77 38</span> o escríbenos por Instagram.</p>
-        <button class="btn btn-dark js-copy-phone js-up">Copiar teléfono <span class="arr">→</span></button>
+        <button class="link dark js-copy-phone js-up" style="margin-top:24px">Copiar teléfono →</button>
       </div>
       <div class="qas">
         <div class="qa" data-open><button aria-expanded="true"><span>¿Hace falta reservar?</span><span class="ico" aria-hidden="true"></span></button><div class="ans"><div><p>Te lo recomendamos, sobre todo el fin de semana. Puedes reservar online o por teléfono.</p></div></div></div>
@@ -727,7 +868,7 @@
       <h2 class="display js-lines"><span class="line-mask"><span id="tonight-h">¿Cenamos esta noche?</span></span></h2>
       <p class="st" id="tonight-st"></p>
       <div class="ctas">
-        <a class="btn btn-solid js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
+        <a class="btn btn-solid js-reserva" data-loc="esta-noche" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
         <button class="btn js-copy-phone">932 22 77 38</button>
       </div>
     </div>
@@ -747,15 +888,36 @@
           <p class="addr-sub">08006 Barcelona · Sarrià-Sant Gervasi</p>
           <span class="code">C44W+6P Barcelona</span>
           <div class="v-ctas">
-            <a class="btn btn-solid js-reserva" href="#" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
-            <a class="btn" id="maps" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="btn btn-solid js-reserva" data-loc="visitanos" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa <span class="arr">→</span></a>
+            <a class="btn" id="maps" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Cómo llegar</a>
           </div>
           <div class="contact">
             <div class="crow"><div><span class="k">Teléfono</span><span class="v" id="phone">932 22 77 38</span></div><button class="link" id="copy-phone">Copiar número</button></div>
-            <div class="crow"><div><span class="k">Instagram</span><span class="v">@galliolibistrot</span></div><a class="link" id="ig" href="#" target="_blank" rel="noopener">Ver perfil</a></div>
+            <div class="crow"><div><span class="k">Instagram</span><span class="v">@galliolibistrot</span></div><a class="link" id="ig" href="https://www.instagram.com/galliolibistrot/" target="_blank" rel="noopener">Ver perfil</a></div>
           </div>
           <div class="services"><span>Comer en el local</span><span>Recogida sin entrar</span><span>A domicilio</span><span>LGBTQ+ friendly</span></div>
         </div>
+      </div>
+
+      <div class="grupos" id="grupos">
+        <div class="grupos-head">
+          <p class="eyebrow">Grupos y consultas</p>
+          <h3 class="display">¿Sois un grupo grande?</h3>
+          <p>Cumpleaños, cenas de empresa o cualquier duda: escríbenos y te respondemos. Para una mesa normal, usa el botón de reserva.</p>
+        </div>
+        <form class="form" id="form" name="consultas" method="POST" action="/" data-netlify="true" netlify-honeypot="empresa" novalidate>
+          <input type="hidden" name="form-name" value="consultas">
+          <div class="hp" aria-hidden="true"><label for="f-empresa">No rellenes este campo</label><input id="f-empresa" name="empresa" tabindex="-1" autocomplete="off"></div>
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" maxlength="80" required aria-describedby="e-nombre"><p class="err" id="e-nombre"></p></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-email"><p class="err" id="e-email"></p></div>
+          <div class="field"><label for="f-tel">Teléfono <span class="opt">(opcional)</span></label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" maxlength="20" aria-describedby="e-tel"><p class="err" id="e-tel"></p></div>
+          <div class="field"><label for="f-fecha">Fecha</label><input id="f-fecha" name="fecha" type="date" required aria-describedby="e-fecha"><p class="err" id="e-fecha"></p></div>
+          <div class="field"><label for="f-pax">Personas</label><input id="f-pax" name="personas" type="number" inputmode="numeric" min="1" max="80" required aria-describedby="e-pax"><p class="err" id="e-pax"></p></div>
+          <div class="field full"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="4" maxlength="1000" required aria-describedby="e-msg"></textarea><span class="count" id="f-count">0 / 1000</span><p class="err" id="e-msg"></p></div>
+          <div class="field full check"><input id="f-rgpd" name="privacidad" type="checkbox" required aria-describedby="e-rgpd"><label for="f-rgpd">He leído y acepto la <a href="privacidad.html">política de privacidad</a>.</label><p class="err" id="e-rgpd"></p></div>
+          <div class="form-foot full"><button class="btn" type="submit" id="f-send">Enviar consulta</button><p class="form-status" id="f-status" role="status" aria-live="polite"></p></div>
+          <p class="form-legal full">Responsable: [RAZÓN SOCIAL]. Finalidad: responder a tu consulta. Base legal: tu consentimiento. No cedemos tus datos a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación y supresión, entre otros, como explica la <a href="privacidad.html">política de privacidad</a>.</p>
+        </form>
       </div>
     </div>
   </section>
@@ -766,34 +928,128 @@
   <div class="wrap foot-row">
     <span>Gallioli Bistrot · Ronda del General Mitre, 220 · Barcelona</span>
     <span>932 22 77 38 · <a href="https://www.instagram.com/galliolibistrot/" target="_blank" rel="noopener">@galliolibistrot</a></span>
+    <nav class="foot-legal" aria-label="Información legal">
+      <a href="terminos.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="privacidad.html#cookies">Cookies</a>
+      <button type="button" data-cookie-settings>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
+<div class="mcta" id="mcta">
+  <span class="pill" id="mcta-pill"><span class="dot"></span><span id="mcta-text">Horario</span></span>
+  <a class="btn btn-solid js-reserva" data-loc="barra-movil" href="https://www.google.com/maps/search/?api=1&amp;query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" target="_blank" rel="noopener">Reservar mesa</a>
+</div>
+
 <div class="toast" id="toast" role="status"></div>
 
+<script src="assets/consent.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
 <script>
 (() => {
-  /* ===== Enlaces (cambiar aquí) ===== */
-  const LINKS = {
-    reserva: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona", // TODO: enlace directo de last.app
-    maps: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona",
-    instagram: "https://www.instagram.com/galliolibistrot/",
-    pedir: "https://www.google.com/maps/search/?api=1&query=Gallioli+Bistrot+Ronda+del+General+Mitre+220+Barcelona" // TODO: enlace de pedido online
-  };
+  /* Los enlaces de reserva, pedidos, mapa e Instagram están escritos en el HTML (ver README.md). */
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-  $$(".js-reserva").forEach(a => a.href = LINKS.reserva);
-  $$(".js-pedir").forEach(a => a.href = LINKS.pedir);
-  $("#maps").href = LINKS.maps; $("#ig").href = LINKS.instagram;
+  const track = (name, params) => { try { window.gallioliTrack && window.gallioliTrack(name, params); } catch (e) {} };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const toastEl = $("#toast"); let tt;
   const toast = m => { toastEl.textContent = m; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove("show"), 2200); };
   $$("#copy-phone, .js-copy-phone").forEach(b => b.addEventListener("click", async () => {
+    track("telefono_copiado");
     try { await navigator.clipboard.writeText("932 22 77 38"); toast("Número copiado: 932 22 77 38"); }
     catch (e) { toast("Llámanos al 932 22 77 38"); }
   }));
+
+  /* ===== Analítica de los botones principales ===== */
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    if (a.classList.contains("js-reserva")) track("reserva_click", { ubicacion: a.dataset.loc || "" });
+    else if (a.classList.contains("js-pedir")) track("pedido_click");
+    else if (a.id === "maps") track("como_llegar_click");
+  });
+
+  /* ===== Menú móvil ===== */
+  const menuBtn = $("#menu-btn"), mnav = $("#mnav");
+  function setMenu(open) {
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    document.body.classList.toggle("menu-open", open);
+    if (open) { mnav.hidden = false; requestAnimationFrame(() => requestAnimationFrame(() => mnav.classList.add("open"))); mnav.querySelector("a").focus({ preventScroll: true }); }
+    else { mnav.classList.remove("open"); setTimeout(() => { if (!mnav.classList.contains("open")) mnav.hidden = true; }, 700); }
+  }
+  menuBtn.addEventListener("click", () => setMenu(menuBtn.getAttribute("aria-expanded") !== "true"));
+  mnav.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+  addEventListener("keydown", e => { if (e.key === "Escape" && document.body.classList.contains("menu-open")) { setMenu(false); menuBtn.focus(); } });
+  addEventListener("resize", () => { if (innerWidth > 960 && document.body.classList.contains("menu-open")) setMenu(false); });
+
+  /* ===== Barra de reserva en móvil: aparece al dejar la portada ===== */
+  const mcta = $("#mcta");
+  // Se oculta en la portada y cuando ya se ven los botones de reserva o el formulario
+  const hideWhen = new Set();
+  const syncCta = () => mcta.classList.toggle("show", hideWhen.size === 0);
+  const ctaIO = new IntersectionObserver(entries => { entries.forEach(e => e.isIntersecting ? hideWhen.add(e.target) : hideWhen.delete(e.target)); syncCta(); });
+  [".hero", ".v-ctas", "#grupos", ".tonight .ctas"].forEach(sel => ctaIO.observe($(sel)));
+
+  /* ===== Formulario de grupos: validación y antispam ===== */
+  // Modo de envío: "none" (sin conectar), "netlify" (Netlify Forms) o "endpoint" (p. ej. Formspree).
+  const FORM = { mode: "none", endpoint: "" }; // TODO: configurar al publicar (ver README.md)
+  const form = $("#form"), fStatus = $("#f-status"), sendBtn = $("#f-send");
+  const loadedAt = Date.now();
+  let lastSent = 0;
+  const today = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+  $("#f-fecha").min = today();
+  const RULES = {
+    nombre: v => v.trim().length < 2 ? "Escribe tu nombre." : "",
+    email: v => !v.trim() ? "Escribe tu email." : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? "Revisa el email: parece incompleto." : "",
+    telefono: v => v.trim() && !/^[+]?[0-9 ()-]{9,20}$/.test(v.trim()) ? "Revisa el teléfono: usa solo números, con al menos 9 cifras." : "",
+    fecha: v => !v ? "Elige una fecha." : v < today() ? "La fecha no puede ser anterior a hoy." : "",
+    personas: v => !v ? "Indica cuántas personas seréis." : (+v < 1 || +v > 80 || !Number.isInteger(+v)) ? "Indica un número entre 1 y 80." : "",
+    mensaje: v => v.trim().length < 10 ? "Cuéntanos un poco más (mínimo 10 caracteres)." : (v.match(/https?:\/\//gi) || []).length > 1 ? "Quita los enlaces del mensaje, por favor." : "",
+    privacidad: (v, el) => !el.checked ? "Necesitamos que aceptes la política de privacidad para responderte." : ""
+  };
+  const touched = new Set();
+  function check(el) {
+    const rule = RULES[el.name]; if (!rule) return true;
+    const msg = rule(el.value, el), err = document.getElementById("e-" + (el.name === "telefono" ? "tel" : el.name === "personas" ? "pax" : el.name === "mensaje" ? "msg" : el.name === "privacidad" ? "rgpd" : el.name));
+    el.setAttribute("aria-invalid", msg ? "true" : "false");
+    if (err) err.textContent = msg;
+    return !msg;
+  }
+  form.addEventListener("blur", e => { if (RULES[e.target.name]) { touched.add(e.target.name); check(e.target); } }, true);
+  form.addEventListener("input", e => {
+    if (e.target.name === "mensaje") $("#f-count").textContent = e.target.value.length + " / 1000";
+    if (touched.has(e.target.name)) check(e.target);
+  });
+  form.addEventListener("change", e => { if (e.target.type === "checkbox") check(e.target); });
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    fStatus.className = "form-status"; fStatus.textContent = "";
+    const fields = [...form.elements].filter(el => RULES[el.name]);
+    fields.forEach(el => touched.add(el.name));
+    const bad = fields.filter(el => !check(el));
+    if (bad.length) { bad[0].focus(); fStatus.className = "form-status bad"; fStatus.textContent = bad.length === 1 ? "Revisa el campo marcado." : "Revisa los " + bad.length + " campos marcados."; return; }
+    // Antispam: campo trampa, envío demasiado rápido y un envío por minuto
+    const isBot = form.elements.empresa.value !== "" || Date.now() - loadedAt < 3000;
+    if (Date.now() - lastSent < 60000) { fStatus.className = "form-status bad"; fStatus.textContent = "Ya hemos recibido una consulta hace un momento. Espera un minuto para enviar otra."; return; }
+    if (isBot) { form.reset(); fStatus.className = "form-status ok"; fStatus.textContent = "Gracias. Te responderemos lo antes posible."; return; }
+    if (FORM.mode === "none") { fStatus.className = "form-status bad"; fStatus.textContent = "El formulario todavía no está conectado. Mientras tanto, llámanos al 932 22 77 38."; return; }
+    sendBtn.disabled = true; sendBtn.textContent = "Enviando…";
+    try {
+      const data = new FormData(form);
+      const res = FORM.mode === "netlify"
+        ? await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(data).toString() })
+        : await fetch(FORM.endpoint, { method: "POST", headers: { Accept: "application/json" }, body: data });
+      if (!res.ok) throw new Error(res.status);
+      lastSent = Date.now(); form.reset(); touched.clear(); $("#f-count").textContent = "0 / 1000";
+      fStatus.className = "form-status ok"; fStatus.textContent = "Consulta enviada. Te responderemos lo antes posible.";
+      track("consulta_enviada");
+    } catch (err) {
+      fStatus.className = "form-status bad"; fStatus.textContent = "No se ha podido enviar. Inténtalo de nuevo o llámanos al 932 22 77 38.";
+    } finally { sendBtn.disabled = false; sendBtn.textContent = "Enviar consulta"; }
+  });
 
   /* ===== Preguntas ===== */
   $$(".qa button").forEach(b => b.addEventListener("click", () => {
@@ -814,10 +1070,10 @@
   function status() {
     const { day, min, sec } = now();
     const cur = HOURS[day].find(([a, b]) => min >= a && min < b);
-    if (cur) return { open: true, text: "Abierto · hasta las " + hhmm(cur[1]), left: (cur[1] - min) * 60 - sec, label: "para el cierre", day };
+    if (cur) return { open: true, text: "Abierto · hasta las " + hhmm(cur[1]), short: "Abierto hasta las " + hhmm(cur[1]), left: (cur[1] - min) * 60 - sec, label: "para el cierre", day };
     for (let k = 0; k < 8; k++) {
       const d = (day + k) % 7, nx = HOURS[d].find(([a]) => k > 0 || a > min);
-      if (nx) return { open: false, text: "Cerrado · abre " + (k === 0 ? "hoy" : k === 1 ? "mañana" : "el " + DAYS[d].toLowerCase()) + " a las " + hhmm(nx[0]), left: (k * 1440 + nx[0] - min) * 60 - sec, label: "para abrir", day };
+      if (nx) return { open: false, text: "Cerrado · abre " + (k === 0 ? "hoy" : k === 1 ? "mañana" : "el " + DAYS[d].toLowerCase()) + " a las " + hhmm(nx[0]), short: "Abre " + (k === 0 ? "hoy" : k === 1 ? "mañana" : "el " + DAYS[d].toLowerCase()) + " a las " + hhmm(nx[0]), left: (k * 1440 + nx[0] - min) * 60 - sec, label: "para abrir", day };
     }
   }
   const week = $("#week");
@@ -829,6 +1085,7 @@
   function tick() {
     const s = status();
     $("#pill").classList.toggle("is-open", s.open); $("#pill-text").textContent = s.text;
+    $("#mcta-pill").classList.toggle("is-open", s.open); $("#mcta-text").textContent = s.short;
     const st = $("#now-state"); st.textContent = s.open ? "Abierto ahora" : "Ahora cerrado"; st.className = "now-state " + (s.open ? "open" : "closed");
     const t = Math.max(0, s.left), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), sc = t % 60;
     $("#now-count").textContent = (h ? h + " h " : "") + String(m).padStart(2, "0") + " min " + String(sc).padStart(2, "0") + " s " + s.label;
@@ -1082,9 +1339,12 @@
 
   // navegación con desplazamiento suave
   $$('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
-    const t = document.querySelector(a.getAttribute("href")); if (!t) return;
+    const h = a.getAttribute("href"); if (h.length < 2) return;
+    const t = document.querySelector(h); if (!t) return;
     e.preventDefault(); t.scrollIntoView({ behavior: "smooth" });
   }));
   addEventListener("load", () => ScrollTrigger.refresh());
 })();
 </script>
+</body>
+</html>

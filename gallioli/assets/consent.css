@@ -1,0 +1,31 @@
+/* Banner de consentimiento de cookies (compartido por todas las páginas) */
+.cc {
+  position: fixed; z-index: 95; left: 16px; right: 16px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  max-width: 560px; margin-inline: auto 0;
+  background: #0F2A1E; color: #ECEDE6; border: 1px solid rgba(236, 237, 230, .16);
+  border-radius: 10px; box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  padding: 22px; font: 15px/1.5 "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  transform: translateY(24px); opacity: 0; transition: transform .6s cubic-bezier(.2, .7, .1, 1), opacity .4s;
+}
+.cc.show { transform: none; opacity: 1; }
+.cc[hidden], .cc [hidden] { display: none !important; }
+@media (min-width: 700px) { .cc { left: auto; right: 24px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); } }
+.cc-t { font-family: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif; font-weight: 800; text-transform: uppercase; font-size: 26px; line-height: 1; margin: 0 0 8px; color: #F1D27A; }
+.cc p { margin: 0; }
+.cc a { color: #F1D27A; }
+.cc-opts { display: grid; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(236, 237, 230, .16); }
+.cc-opts label { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; font-size: 14px; }
+.cc-opts input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: #F1D27A; }
+.cc-opts small { display: block; color: #A7B6AC; font-size: 12.5px; }
+.cc-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.cc-btns button {
+  flex: 1 1 120px; min-height: 44px; border-radius: 999px; font: 600 14px/1 "Hanken Grotesk", Arial, sans-serif; cursor: pointer;
+  border: 1px solid #F1D27A; background: #F1D27A; color: #0F2A1E; transition: background .3s, color .3s;
+}
+.cc-btns button[data-cc="config"] { order: 3; flex: 1 1 100%; min-height: 36px; background: none; border: 0; color: #ECEDE6; text-decoration: underline; text-underline-offset: 3px; }
+.cc-btns button[data-cc="config"]:hover { background: none; color: #F1D27A; }
+.cc-btns button[data-cc="save"] { order: 3; flex: 1 1 100%; background: transparent; color: #ECEDE6; border-color: rgba(236, 237, 230, .4); }
+.cc-btns button:hover { background: #ECEDE6; border-color: #ECEDE6; color: #0F2A1E; }
+.cc-btns button:focus-visible { outline: 2px solid #F1D27A; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .cc { transition: none; } }
