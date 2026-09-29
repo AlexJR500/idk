@@ -1,0 +1,83 @@
+<section class="visita" id="visita" aria-labelledby="visita-h">
+  <div class="wrap">
+    <h2 id="visita-h" class="visita-h rv-focus">Ronda del General Mitre, 220</h2>
+
+    <div class="g12 visita-grid">
+      <div class="visita-left">
+        <div class="esfera">
+          <svg class="dial" viewBox="0 0 320 180" aria-hidden="true" focusable="false">
+            <path class="dial-track" d="M20 168A140 140 0 0 1 300 168"/>
+            <g class="dial-ticks">
+              <path d="M8 168H28"/><path d="M84 36.4 94 53.7"/><path d="M236 36.4 226 53.7"/><path d="M292 168H312"/>
+            </g>
+            <g class="dial-arcs">
+              <path class="dial-arc" d="M21.2 149.73A140 140 0 0 1 90 46.76"/>
+              <path class="dial-arc" d="M230 46.76A140 140 0 0 1 295.23 131.77"/>
+            </g>
+            <g class="dial-labels">
+              <text x="44" y="162">12:00</text><text x="104" y="80">16:00</text><text x="216" y="80" text-anchor="end">20:00</text><text x="276" y="162" text-anchor="end">24:00</text>
+            </g>
+            <g class="dial-marker" transform="translate(230 46.76)"><circle r="14" fill="url(#dot-halo)"/><circle class="dm-dot" r="5"/></g>
+          </svg>
+          <div class="esfera-txt">
+            <p class="esfera-st" data-status="text">Horario</p>
+            <p class="esfera-count" data-countdown></p>
+          </div>
+        </div>
+
+        <h3 class="week-h">La semana</h3>
+        <ul class="week">
+          <li class="rv-lum" data-day="2" style="--i:0"><span class="wd">Martes</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i></span><span class="wh">12:30–16:00</span></li>
+          <li class="rv-lum" data-day="3" style="--i:1"><span class="wd">Miércoles</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i><i style="left:66.667%;width:25%"></i></span><span class="wh">12:30–16:00&nbsp;· 20:00–23:00</span></li>
+          <li class="rv-lum" data-day="4" style="--i:2"><span class="wd">Jueves</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i><i style="left:66.667%;width:25%"></i></span><span class="wh">12:30–16:00&nbsp;· 20:00–23:00</span></li>
+          <li class="rv-lum" data-day="5" style="--i:3"><span class="wd">Viernes</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i><i style="left:66.667%;width:25%"></i></span><span class="wh">12:30–16:00&nbsp;· 20:00–23:00</span></li>
+          <li class="rv-lum" data-day="6" style="--i:4"><span class="wd">Sábado</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i><i style="left:66.667%;width:25%"></i></span><span class="wh">12:30–16:00&nbsp;· 20:00–23:00</span></li>
+          <li class="rv-lum" data-day="0" style="--i:5"><span class="wd">Domingo</span><span class="wt" aria-hidden="true"><i style="left:4.167%;width:29.167%"></i></span><span class="wh">12:30–16:00</span></li>
+          <li class="rv-lum" data-day="1" style="--i:6"><span class="wd">Lunes</span><span class="wt" aria-hidden="true"></span><span class="wh">Cerrado</span></li>
+        </ul>
+      </div>
+
+      <div class="visita-right">
+        <p class="v-addr rv">08006 Barcelona&nbsp;· Sarrià-Sant Gervasi<br>C44W+6P Barcelona</p>
+        <div class="visita-actions">
+          {{RESERVA visitanos}}
+          <a class="tlink js-maps" href="{{MAPS}}" target="_blank" rel="noopener">Cómo llegar{{NE}}{{NEW}}</a>
+        </div>
+        <dl class="v-contact rv" style="--i:2">
+          <div><dt>Teléfono</dt><dd>{{TEL}} {{COPY}}</dd></div>
+          <div><dt>Instagram</dt><dd><a class="tlink" href="{{IG}}" target="_blank" rel="noopener">@galliolibistrot{{NE}}{{NEW}}</a></dd></div>
+        </dl>
+        <p class="v-serv rv" style="--i:3">Comer en la sala, recogida sin entrar y a domicilio. LGBTQ+ friendly.</p>
+      </div>
+    </div>
+
+    <div class="grupos g12" id="grupos">
+      <div class="grupos-l">
+        <div class="grupos-light" aria-hidden="true"><div class="pool grupos-pool"></div>{{LAMP grupos-lamp}}</div>
+        <h3 id="grupos-h" class="grupos-h rv">Mesas largas y celebraciones</h3>
+        <p class="grupos-p rv" style="--i:1">Cumpleaños, cenas de empresa o cualquier duda: escríbenos y te respondemos. Para una mesa normal, usa el botón de reserva.</p>
+      </div>
+
+      <div class="grupos-r">
+        <div class="form-plane">
+          <div class="pool form-pool" aria-hidden="true"></div>
+          <form id="form" class="form" name="consultas" novalidate aria-labelledby="grupos-h">
+            <div class="hp" aria-hidden="true"><label for="f-web2">No rellenes este campo</label><input id="f-web2" name="web2" tabindex="-1" autocomplete="off" data-lpignore="true"></div>
+            <div class="field rv" style="--i:0"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" maxlength="80" required aria-describedby="e-nombre"><p class="err" id="e-nombre"></p></div>
+            <div class="field rv" style="--i:.67"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="120" required aria-describedby="e-email"><p class="err" id="e-email"></p></div>
+            <div class="field num rv" style="--i:1.33"><label for="f-tel">Teléfono (opcional)</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" maxlength="20" aria-describedby="e-tel"><p class="err" id="e-tel"></p></div>
+            <div class="field num rv" style="--i:2"><label for="f-fecha">Fecha</label><input id="f-fecha" name="fecha" type="date" required aria-describedby="e-fecha"><p class="err" id="e-fecha"></p></div>
+            <div class="field rv" style="--i:2.67"><label for="f-pax">Personas</label><input id="f-pax" name="personas" type="number" inputmode="numeric" min="1" max="80" required aria-describedby="e-pax"><p class="err" id="e-pax"></p></div>
+            <div class="field full rv" style="--i:3.33"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="4" maxlength="1000" required aria-describedby="f-count e-msg"></textarea><span class="count" id="f-count">0 / 1000</span><p class="err" id="e-msg"></p></div>
+            <div class="field full check rv" style="--i:4"><input id="f-rgpd" name="privacidad" type="checkbox" required aria-describedby="e-rgpd"><label for="f-rgpd">He leído y acepto la <a class="tlink" href="privacidad.html">política de privacidad</a>.</label><p class="err" id="e-rgpd"></p></div>
+            <div class="form-foot full">
+              <button class="btn-line" type="submit" id="f-send">Enviar consulta</button>
+              <p class="form-status" id="f-status" role="status" aria-live="polite"></p>
+            </div>
+            <p class="form-legal full"><strong>Formulario de demostración: no envía ningún dato.</strong> Responsable: [RAZÓN SOCIAL]. Finalidad: responder a tu consulta. Base legal: tu consentimiento. No cedemos tus datos a terceros salvo obligación legal. Puedes ejercer tus derechos de acceso, rectificación y supresión, entre otros, como explica la <a class="tlink" href="privacidad.html">política de privacidad</a>.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

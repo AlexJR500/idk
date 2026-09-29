@@ -1,0 +1,74 @@
+</main>
+
+<footer class="pie" id="pie">
+  <div class="wrap pie-in">
+    <div class="pie-brand">
+      {{LAMP pie-lamp}}
+      <div>
+        <p class="pie-name">Gallioli Bistrot</p>
+        <p class="pie-tag">Bistrot de barrio en Sant Gervasi.</p>
+      </div>
+    </div>
+    <p class="pie-row"><span>Ronda del General Mitre, 220&nbsp;· Barcelona</span><span class="sep" aria-hidden="true">·</span>{{TEL}}<span class="sep" aria-hidden="true">·</span><a class="tlink" href="{{IG}}" target="_blank" rel="noopener">@galliolibistrot{{NE}}{{NEW}}</a></p>
+    <nav class="pie-legal" aria-label="Información legal">
+      <a class="tlink" href="terminos.html">Aviso legal</a><span class="sep" aria-hidden="true">·</span><a class="tlink" href="privacidad.html">Privacidad</a><span class="sep" aria-hidden="true">·</span><a class="tlink" href="privacidad.html#cookies">Cookies</a><span class="sep" aria-hidden="true">·</span><button type="button" class="tlink" data-cookie-settings>Preferencias de cookies</button>
+    </nav>
+    <p class="pie-prop">Propuesta de diseño para Gallioli Bistrot. No es la web oficial del restaurante.</p>
+    <p class="pie-demo"><button type="button" class="tlink demo-btn" aria-pressed="false">Ver la sala abierta (demostración)</button></p>
+  </div>
+</footer>
+
+<div class="barra" id="barra">
+  <p class="barra-st">{{STATUSLAMP}}<span data-status="short">Horario</span></p>
+  {{RESERVA barra-movil}}
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="vignette" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" style="stop-color:var(--lamp-col);stop-opacity:.55"/>
+      <stop offset=".45" style="stop-color:var(--lamp-col);stop-opacity:.18"/>
+      <stop offset="1" style="stop-color:var(--lamp-col);stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="dot-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" style="stop-color:#FFF4E0;stop-opacity:.5"/>
+      <stop offset="1" style="stop-color:#FFF4E0;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="bar-glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color:var(--lamp-col);stop-opacity:.5"/>
+      <stop offset="1" style="stop-color:var(--lamp-col);stop-opacity:0"/>
+    </linearGradient>
+
+    <symbol id="lamp" viewBox="0 0 48 60" overflow="visible">
+      <circle class="l-halo" cx="24" cy="47" r="15" fill="url(#halo)"/>
+      <rect x="23.4" y="0" width="1.2" height="17" style="fill:var(--piedra)"/>
+      <rect x="20.5" y="16" width="7" height="5" rx="1" style="fill:#57514B"/>
+      <path d="M5 44C5 32.5 12.5 23.5 24 22.5C35.5 23.5 43 32.5 43 44Z" style="fill:var(--humo);stroke:var(--piedra)" stroke-width=".8"/>
+      <path d="M10.5 36C12.5 30 16.5 26.5 22 25.6" fill="none" style="stroke:var(--ajo)" stroke-width=".8" opacity=".45"/>
+      <ellipse class="l-rim" cx="24" cy="44" rx="19" ry="2.6" fill="none" stroke-width="1.1"/>
+      <circle class="l-bulb" cx="24" cy="46.2" r="4"/>
+      <circle class="l-off" cx="24" cy="46.2" r="4" fill="none" stroke-width=".8"/>
+    </symbol>
+
+    <symbol id="lamp-mini" viewBox="0 0 24 20" overflow="visible">
+      <circle class="l-halo" cx="12" cy="14.6" r="7.5" fill="url(#halo)"/>
+      <rect x="11.4" y="0" width="1.2" height="3.2" style="fill:var(--piedra)"/>
+      <path d="M2 13C2 7 6.5 3 12 3C17.5 3 22 7 22 13Z" style="fill:#2A2622;stroke:var(--piedra)" stroke-width="1"/>
+      <ellipse class="l-rim" cx="12" cy="13" rx="10" ry="1.3" fill="none" stroke-width="1"/>
+      <circle class="l-bulb" cx="12" cy="14.4" r="2.4"/>
+      <circle class="l-off" cx="12" cy="14.4" r="2.4" fill="none" stroke-width=".9"/>
+    </symbol>
+
+    <symbol id="lamp-bar" viewBox="0 0 320 40" overflow="visible">
+      <rect x="39.5" y="0" width="1" height="22" style="fill:var(--piedra)"/>
+      <rect x="279.5" y="0" width="1" height="22" style="fill:var(--piedra)"/>
+      <rect x="18" y="33.5" width="284" height="6.5" fill="url(#bar-glow)" class="l-glow"/>
+      <rect x="10" y="22" width="300" height="10" style="fill:var(--humo);stroke:var(--piedra)" stroke-width=".8"/>
+      <rect x="14" y="24.2" width="292" height=".7" style="fill:var(--ajo)" opacity=".35"/>
+      <rect class="l-strip" x="18" y="31" width="284" height="2.5"/>
+    </symbol>
+  </defs>
+</svg>

@@ -1,0 +1,35 @@
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="hdr intro-dark" id="cabecera">
+  <div class="hdr-in">
+    <a class="wordmark" href="#inicio" aria-label="Gallioli Bistrot, inicio">Gallioli</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#sala">La sala</a>
+      <a href="#platos">Platos</a>
+      <a href="#carta">Carta</a>
+      <a href="#sobremesa">Reseñas</a>
+      <a href="#visita">Visítanos</a>
+    </nav>
+    <p class="hdr-status">{{STATUSLAMP}}<span class="st-text" data-status="text">Horario</span><span class="st-word" data-status="word">Horario</span></p>
+    {{RESERVA cabecera sm hdr-cta}}
+    <button type="button" class="menu-btn" aria-expanded="false" aria-controls="menu">Menú</button>
+  </div>
+</header>
+
+<div id="menu" class="menu" hidden>
+  <nav class="menu-nav" aria-label="Menú">
+    <ul>
+      <li style="--i:0"><a href="#sala">La sala</a></li>
+      <li style="--i:1"><a href="#platos">Platos</a></li>
+      <li style="--i:2"><a href="#carta">Carta</a></li>
+      <li style="--i:3"><a href="#sobremesa">Reseñas</a></li>
+      <li style="--i:4"><a href="#preguntas">Preguntas</a></li>
+      <li style="--i:5"><a href="#visita">Visítanos</a></li>
+    </ul>
+  </nav>
+  <div class="menu-foot">
+    <p class="menu-status">{{STATUSLAMP}}<span data-status="text">Horario</span></p>
+    {{RESERVA menu}}
+    <p class="menu-meta">{{TEL}}&nbsp;· Ronda del General Mitre, 220</p>
+  </div>
+</div>

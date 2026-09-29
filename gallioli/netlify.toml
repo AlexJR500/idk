@@ -1,0 +1,25 @@
+# Gallioli Bistrot · configuración para Netlify
+# Netlify activa HTTPS y sirve 404.html automáticamente; aquí se fuerzan cabeceras de seguridad.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Si se usa un dominio con y sin www, redirige todo a la versión con www
+[[redirects]]
+  from = "https://tudominio.com/*"
+  to = "https://www.tudominio.com/:splat"
+  status = 301
+  force = true

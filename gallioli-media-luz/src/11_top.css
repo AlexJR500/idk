@@ -1,0 +1,194 @@
+/* ============ header ============ */
+.hdr {
+  position: fixed; inset: 0 0 auto; z-index: 50; height: var(--hdr);
+  background: rgba(13, 12, 11, 0); border-bottom: 1px solid transparent;
+  transition: background-color .35s, border-color .35s;
+}
+.hdr.is-scrolled { background: #0D0C0B; border-bottom-color: var(--ceniza); } /* opaque: with no blur, any see-through shows the page behind */
+html.menu-open .hdr { background: var(--humo); border-bottom-color: transparent; } /* one surface with the menu under it */
+.hdr-in { height: 100%; display: flex; align-items: center; gap: clamp(16px, 2.2vw, 36px); max-width: calc(var(--maxw) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.wordmark { font: italic 500 24px/1 var(--f-display); font-optical-sizing: auto; color: var(--ajo); text-decoration: none; padding: 10px 0; white-space: nowrap; }
+.nav { display: flex; gap: clamp(18px, 2.3vw, 34px); margin-left: clamp(8px, 3vw, 52px); }
+.nav a { font: 500 16px/1 var(--f-body); color: var(--piedra); text-decoration: none; padding: 14px 0; white-space: nowrap; transition: color .2s, text-shadow .2s; }
+.nav a[aria-current="true"] { color: var(--ajo); }
+.nav a:focus-visible { color: var(--luz); text-shadow: 0 0 18px rgba(255, 244, 224, .35); }
+@media (hover: hover) { .nav a:hover { color: var(--luz); text-shadow: 0 0 18px rgba(255, 244, 224, .35); } }
+.hdr-status { margin-left: auto; display: flex; align-items: center; gap: 9px; font: 500 14px/1.2 var(--f-body); color: var(--ajo); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st-word { display: none; }
+.menu-btn { display: none; }
+@media (max-width: 1179px) { .st-text { display: none; } .st-word { display: inline; } }
+@media (max-width: 960px) {
+  .nav, .hdr-cta { display: none; }
+  .menu-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 4px; margin-right: -4px; font: 500 15px/1 var(--f-body); color: var(--ajo); }
+  html:not(.js) .menu-btn { display: none; } /* it needs JS to open; without it the nav is a strip that scrolls sideways */
+  html:not(.js) .nav { display: flex; flex: 1 1 auto; min-width: 0; gap: 20px; margin-left: 12px; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  html:not(.js) .nav::-webkit-scrollbar { display: none; }
+  html:not(.js) .nav a { font-size: 15px; }
+  html:not(.js) .hdr-status { display: none; }
+  .hdr-status { gap: 8px; }
+}
+
+/* ============ mobile menu ============ */
+.menu {
+  position: fixed; inset: 56px 0 0 0; z-index: 88; /* over the cookie strip (85) while open */ display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+  background: linear-gradient(var(--humo), var(--carbon) 70%);
+  padding: 28px var(--gutter) calc(24px + env(safe-area-inset-bottom, 0px)); overflow-y: auto; overscroll-behavior: contain;
+  opacity: 0; transition: opacity .25s var(--e-soft);
+}
+.menu.is-open { opacity: 1; transition-duration: .35s; }
+.menu-nav a { display: block; font: 400 44px/1.1 var(--f-display); font-optical-sizing: auto; color: var(--piedra); opacity: .4; text-decoration: none; padding: 6px 0; transition: color .5s var(--e-soft), opacity .5s var(--e-soft); transition-delay: calc(var(--i, 0) * 60ms); }
+.menu.is-open .menu-nav a { color: var(--ajo); opacity: 1; }
+.menu-nav a:focus-visible { color: var(--luz); }
+.menu-foot { display: grid; gap: 16px; }
+.menu-status { display: flex; align-items: center; gap: 10px; font: 500 15px/1.3 var(--f-body); color: var(--ajo); font-variant-numeric: tabular-nums; }
+.menu-foot .btn-luz { width: 100%; }
+.menu-meta { font: 400 15px/1.5 var(--f-body); color: var(--piedra); }
+html.menu-open { overflow: hidden; }
+
+/* ============ hero ============ */
+.hero {
+  --lx: 70%; --lw: clamp(120px, 10vw, 170px); --by: 26%;
+  --pcx: 70%; --pcy: 78%; --pw: 44vw; --ph: 13vw;
+  --plx: 70%; --ply: 74%; --plw: clamp(280px, 26vw, 460px);
+  min-height: max(640px, 100svh); overflow: clip;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding-bottom: calc(9svh + 4px);
+}
+.hero-img { position: absolute; inset: 0; pointer-events: none; }
+.hero-pool-wrap { position: absolute; inset: 0; transform-origin: var(--pcx) var(--pcy); }
+.hero-pool { left: var(--pcx); top: var(--pcy); width: var(--pw); height: var(--ph); translate: -50% -50%; }
+.hero-cone { left: calc(var(--lx) - var(--pw) / 2); top: var(--by); width: var(--pw); height: calc(var(--pcy) - var(--by)); }
+.hero-plate-box { position: absolute; left: var(--plx); top: var(--ply); width: var(--plw); aspect-ratio: 16 / 10; translate: -50% -50%; }
+.hero-plate-box .contact { left: 10%; right: 10%; bottom: 8%; height: 12%; }
+.hero-plate { position: absolute; inset: 0; width: 100%; height: 100%; visibility: hidden; opacity: 0; }
+/* the engraving lands like the lamp's light: from dark to lit; until then (WebGL2 only, at most about 2-3 s) the type plate waits unseen */
+.hero.is-gl-plate .hero-plate { visibility: visible; opacity: 1; animation: plate-land .6s var(--e-light) backwards; }
+.hero.is-gl-plate .hero-type { display: none; }
+.hero.gl-wait .hero-type { opacity: 0; }
+@keyframes plate-land { from { opacity: 0; filter: brightness(.3); } }
+.hero-type { left: 50%; top: 44%; translate: -50% -50%; font-size: calc(var(--plw) * .165); --mx: 58%; transition: opacity .6s var(--e-light); }
+.haze-host { position: absolute; inset: 0; pointer-events: none; }
+.haze { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; visibility: hidden; }
+.is-haze .haze { visibility: visible; }
+.hero.is-haze .hero-cone, .noche.is-haze .noche-cone { visibility: hidden; }
+.hero-cord { left: var(--lx); top: var(--hdr); height: calc(var(--by) - .9625 * var(--lw) + 2px - var(--hdr)); } /* hangs from under the header, never through its text */
+.hero-lamp { position: absolute; left: var(--lx); top: calc(var(--by) - .9625 * var(--lw)); width: var(--lw); height: calc(var(--lw) * 1.25); translate: -50% 0; }
+.hero-halo { left: var(--lx); top: var(--by); width: calc(var(--lw) * 1.6); aspect-ratio: 1; translate: -50% -50%; }
+
+.hero-text { position: relative; z-index: 2; }
+.proposal { display: inline-block; font: 500 13px/1.3 var(--f-body); color: var(--ajo); border: 1px solid var(--cordel); padding: 5px 10px; margin-bottom: clamp(20px, 3.4svh, 32px); }
+.proposal .pl-nw { white-space: nowrap; }   /* when the label wraps (phones), the dot starts the second line instead of hanging at the end of the first; the words stay the same */
+.h1 { display: block; }
+.h1-name { display: block; font: italic 500 var(--t-name)/1.2 var(--f-display); font-optical-sizing: auto; color: var(--ajo); margin-bottom: .3em; transform-origin: 0 50%; }
+.h1-big { display: block; width: fit-content; font: 400 var(--t-hero)/.95 var(--f-display); font-optical-sizing: auto; letter-spacing: -.01em; color: var(--ajo); padding-bottom: .04em; }
+.hero-sub { font: 400 18px/1.55 var(--f-body); color: var(--ajo); max-width: 34ch; margin-top: clamp(20px, 3svh, 30px); }
+.hero-status { display: flex; align-items: center; gap: 10px; margin-top: 18px; font: 500 15px/1.3 var(--f-body); color: var(--ajo); font-variant-numeric: tabular-nums; }
+.hero-status .lamp-mini { width: 20px; height: 17px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin-top: clamp(20px, 3.2svh, 32px); }
+.hero-facts {
+  position: absolute; left: 0; right: 0; bottom: 3svh; z-index: 2; margin-inline: auto;
+  max-width: calc(var(--maxw) + 2 * var(--gutter)); padding-inline: var(--gutter);
+  font: 500 15px/1.4 var(--f-body); color: var(--piedra);
+}
+/* Each fact is unbreakable and carries its dot in front; the row is pulled left by one dot's width inside a clipped
+   box, so the dot that would start a line falls outside it: no line starts or ends on a separator. */
+.hf-clip { display: block; overflow: hidden; }
+.hf-row { display: flex; flex-wrap: wrap; margin-left: -1.1em; }
+.hf { white-space: nowrap; }
+.hf:first-child::before { content: ""; display: inline-block; width: 1.1em; }
+.hf-dot { display: inline-block; width: 1.1em; text-align: center; }
+
+@media (max-width: 960px) {
+  .hero {
+    /* the bulb hangs 28px above the plate, over its centre third; the label (two lines, 154px) stays left of the lamp */
+    --lx: max(59.5%, 214px); --lw: 76px; --by: 130px; --pw: 300px; --ph: 72px;
+    --plx: calc(var(--lx) - 32px); --pcx: var(--plx); --plw: 208px; --ply: 223px; --pcy: 239px; --ty: 282px;
+    justify-content: flex-start; padding-top: var(--ty); padding-bottom: 36px; min-height: 100svh;
+  }
+  .hero-text { position: static; }
+  .proposal { position: absolute; z-index: 3; top: 68px; left: var(--gutter); margin: 0; padding-inline: 8px; max-width: 154px; }
+  .h1-name { font-size: 22px; margin-bottom: 2px; }
+  .hero-sub { font-size: 16px; line-height: 1.45; margin-top: 14px; }
+  .hero-status { margin-top: 12px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 6px; margin-top: 16px; }
+  .hero-actions .btn-luz { width: 100%; }
+  .hero-actions .tlink { align-self: flex-start; padding: 10px 0; }
+  .hero-facts { position: relative; bottom: auto; width: 100%; margin-top: auto; padding-top: 18px; font-size: 14px; }
+}
+@media (min-width: 601px) and (max-width: 960px) {
+  .hero {
+    --plw: 46vw; --plx: 56%; --pcx: 56%; --lx: 62%; --lw: 110px; --by: max(196px, 24svh); /* taller tablets: the group comes down and the text fills the height */
+    --ply: calc(var(--by) + 30px + var(--plw) * .3125); --pcy: calc(var(--ply) + 20px); --pw: 66vw; --ph: 14.5vw;
+    --ty: calc(var(--ply) + var(--plw) * .3125 - 4px);
+  }
+  .proposal { max-width: none; }
+  .hero-actions { flex-direction: row; align-items: center; gap: 12px 28px; }
+  .hero-actions .btn-luz { width: auto; }
+  .hero-sub { font-size: 18px; }
+}
+
+/* ============ la sala ============ */
+.sala {
+  --py: calc(var(--pad) + 250px);
+  overflow: clip; padding-block: calc(var(--pad) + 150px) var(--pad); /* no min-height: the lamps and text set it, and El pase follows without a dead band */
+}
+.sala-rig { position: absolute; inset: 0; pointer-events: none; }
+.sala-rig-in { height: 100%; }
+.sala-lt { position: relative; grid-row: 1; height: 100%; }
+.sala-lt[data-lamp="0"] { grid-column: 2; }
+.sala-lt[data-lamp="1"] { grid-column: 6; }
+.sala-lt[data-lamp="2"] { grid-column: 10; }
+.sala-lt .cord { left: 50%; top: 0; height: calc(var(--drop) + 2px); }
+.sala-lamp { position: absolute; left: 50%; top: var(--drop); width: 80px; height: 100px; translate: -50% 0; }
+.sala-cone { left: 50%; top: calc(var(--drop) + 77px); width: 21.6vw; height: calc(var(--py) - var(--drop) - 77px); translate: -50% 0; } /* base .72 of the pool: it lands inside it */
+.sala-pool { left: 50%; top: var(--py); width: 30vw; height: 21.4vw; translate: -50% -50%; }
+.gobo { position: absolute; inset: -6%; mix-blend-mode: multiply; }
+.gobo svg { width: 100%; height: 100%; display: block; }
+/* soft enough to read as shadow, sharp enough to read as leaves (spec QA 4 over the first blur values) */
+.gobo-far { filter: blur(5px); opacity: .45; transform: scale(1.1); }
+.gobo-near { filter: blur(2.5px); opacity: .7; }
+@media (max-width: 600px) { .gobo-far { filter: blur(3.5px); } .gobo-near { filter: blur(1.8px); } }
+
+.sala-in { position: relative; z-index: 1; align-items: start; }
+.sala-h { grid-column: 1 / 3; font: italic 500 var(--t-h2-small)/1.2 var(--f-display); color: var(--ajo); padding-top: .55em; }
+.sala-body { grid-column: 3 / 10; }
+.lead { font: 400 var(--t-lead)/1.25 var(--f-display); font-optical-sizing: auto; letter-spacing: -.005em; color: var(--ajo); max-width: 22em; }
+.sala-line { margin-top: 34px; font: 400 17px/1.6 var(--f-body); color: var(--ajo); }
+.sala-line sup { color: var(--piedra); }
+.sala-notes { grid-column: 10 / 13; display: grid; gap: 26px; padding-top: .5em; }
+.note { font: 400 15px/1.55 var(--f-body); color: var(--piedra); hyphens: auto; -webkit-hyphens: auto; }
+.note-h { display: block; font: italic 500 20px/1.25 var(--f-display); color: var(--ajo); margin-bottom: 6px; }
+.note-h sup { font-style: normal; color: var(--piedra); vertical-align: .5em; margin: 0 .25em 0 0; }
+@media (max-width: 1142px) { .lead { font-weight: 500; } }
+@media (max-width: 1179px) and (min-width: 961px) {
+  .sala-body { grid-column: 3 / 10; }
+  .sala-notes { grid-column: 10 / 13; }
+}
+@media (max-width: 960px) {
+  .sala { --py: 400px; padding-top: 250px; min-height: 0; }
+  .sala-lt[data-lamp="0"], .sala-lt[data-lamp="2"] { display: none; }
+  .sala-lt[data-lamp="1"] { grid-column: 1 / -1; --drop: 70px; }
+  .sala-lt[data-lamp="1"] .cord, .sala-lt[data-lamp="1"] .sala-lamp, .sala-lt[data-lamp="1"] .sala-cone, .sala-lt[data-lamp="1"] .sala-pool { left: 68%; }
+  .sala-lamp { width: 64px; height: 80px; }
+  .sala-cone { top: calc(var(--drop) + 62px); height: calc(var(--py) - var(--drop) - 62px); width: 66vw; }
+  .sala-pool { width: 92vw; height: 66vw; max-width: 620px; max-height: 440px; }
+  .sala-h { grid-column: 1 / -1; padding: 0 0 18px; }
+  .sala-body { grid-column: 1 / -1; }
+  .sala-notes { grid-column: 1 / -1; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--ceniza); gap: 22px; }
+}
+@media (min-width: 601px) and (max-width: 960px) {
+  .sala-notes { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+
+/* Without JS nothing aims the hero cone, so on phones and tablets (lamp right of the pool) it is drawn
+   asymmetric in CSS: apex under the bulb, base across the visible pool. */
+@media (max-width: 960px) {
+  html:not(.js) .hero-cone { left: calc(var(--pcx) - var(--pw) * .36); width: calc(var(--pw) * .72); }
+}
+@media (max-width: 600px) {
+  html:not(.js) .hero-cone { clip-path: polygon(136px 0, 144px 0, 100% 100%, 0 100%); } /* apex at --lx: 32px right of the pool centre */
+}
+@media (min-width: 601px) and (max-width: 960px) {
+  html:not(.js) .hero-cone { clip-path: polygon(calc(6vw + 66vw * .36 - 5px) 0, calc(6vw + 66vw * .36 + 5px) 0, 100% 100%, 0 100%); }
+}
+/* On phones the label breaks after "diseño ·" (154px) so it stays clear of the lamp and its cord. */

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Página no encontrada | Gallioli Bistrot</title>
+<meta name="description" content="La página que buscas no existe en la web de Gallioli Bistrot.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F2A1E">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Newsreader:ital,opsz,wght@1,6..72,400&family=Hanken+Grotesk:wght@400;600&family=Martian+Mono:wght@400&display=swap">
+<style>
+  /* Página autónoma: se sirve en cualquier ruta que no exista, así que no depende de otros archivos */
+  :root { color-scheme: dark; --fern: #0F2A1E; --fern-2: #163726; --bone: #ECEDE6; --allioli: #F1D27A; --chili: #C9432B; --muted-d: #A7B6AC; --ease: cubic-bezier(.2, .7, .1, 1); }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--fern); color: var(--bone); font: 400 17px/1.6 "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--allioli); outline-offset: 4px; }
+  .page { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto; padding-inline: clamp(16px, 4vw, 48px); }
+  header { display: flex; justify-content: space-between; align-items: center; min-height: 72px; padding-top: env(safe-area-inset-top, 0px); }
+  .logo { font-family: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif; font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; }
+  .g { color: var(--allioli); }
+  main { display: grid; place-items: center; text-align: center; padding-block: 32px; }
+  .code { display: flex; align-items: center; justify-content: center; gap: clamp(6px, 1.5vw, 16px); font-family: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif; font-weight: 900; font-size: clamp(120px, 26vw, 300px); line-height: .8; }
+  .code span { display: inline-block; animation: rise 1s var(--ease) both; }
+  .code span:last-child { animation-delay: .2s; }
+  .plate { width: .78em; height: .78em; flex: none; animation: spin-in 1.2s var(--ease) .1s both; }
+  .plate .sauce { fill: none; stroke: var(--allioli); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 260; stroke-dashoffset: 260; animation: draw 1.4s ease-in-out .8s forwards; }
+  h1 { font-family: "Newsreader", Georgia, serif; font-style: italic; font-weight: 400; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 28px 0 0; animation: rise 1s var(--ease) .35s both; }
+  p.sub { color: var(--muted-d); margin: 14px auto 0; max-width: 44ch; animation: rise 1s var(--ease) .45s both; }
+  .ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; animation: rise 1s var(--ease) .55s both; }
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 13px 24px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1px solid var(--allioli); background: var(--allioli); color: var(--fern); transition: background .3s, border-color .3s, color .3s; }
+  .btn:hover { background: var(--bone); border-color: var(--bone); }
+  .btn.ghost { background: transparent; color: var(--bone); border-color: rgba(236, 237, 230, .5); }
+  .btn.ghost:hover { background: var(--allioli); color: var(--fern); border-color: var(--allioli); }
+  footer { font-family: "Martian Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-d); text-align: center; padding-block: 24px calc(env(safe-area-inset-bottom, 0px) + 24px); }
+  @keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+  @keyframes spin-in { from { opacity: 0; transform: rotate(-120deg) scale(.6); } to { opacity: 1; transform: none; } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } .plate .sauce { stroke-dashoffset: 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <a class="logo" href="/" data-rel="index.html" aria-label="Gallioli Bistrot, inicio"><span class="g">G</span>allioli</a>
+  </header>
+  <main>
+    <div>
+      <div class="code" aria-label="Error 404">
+        <span aria-hidden="true">4</span>
+        <svg class="plate" viewBox="0 0 300 300" aria-hidden="true">
+          <circle cx="150" cy="150" r="140" fill="#F4F2EA"/>
+          <circle cx="150" cy="150" r="104" fill="none" stroke="rgba(15,42,30,.14)" stroke-width="2"/>
+          <path class="sauce" d="M78 150 C 104 118, 126 180, 150 146 S 196 116, 222 152"/>
+        </svg>
+        <span aria-hidden="true">4</span>
+      </div>
+      <h1>Aquí no queda ni una croqueta.</h1>
+      <p class="sub">La página que buscas no existe o ha cambiado de sitio. Vuelve al inicio para ver la carta, el horario o reservar mesa.</p>
+      <div class="ctas">
+        <a class="btn" href="/" data-rel="index.html">Volver al inicio</a>
+        <a class="btn ghost" href="/#carta" data-rel="index.html#carta">Ver la carta</a>
+      </div>
+    </div>
+  </main>
+  <footer>Gallioli Bistrot · Ronda del General Mitre, 220 · Barcelona</footer>
+</div>
+<script>
+  // Si esta página se abre directamente como archivo (vista previa), usa enlaces relativos
+  if (/\/404\.html$/.test(location.pathname) && location.pathname !== "/404.html") {
+    document.querySelectorAll("[data-rel]").forEach(a => a.setAttribute("href", a.dataset.rel));
+  }
+</script>
+</body>
+</html>
